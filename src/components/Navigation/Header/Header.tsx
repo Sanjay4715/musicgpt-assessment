@@ -7,9 +7,25 @@ import Profile from "../Profile/Profile";
 import MobileSidebar from "../Sidebar/MobileSidebar";
 import { AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+import MobileProfileDropdown from "../ProfileDropdown/MobileProfileDropdown";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const [openMobileProfileDropdown, setOpenMobileProfileDropdown] =
+    useState<boolean>(false);
 
   return (
     <>
@@ -30,10 +46,27 @@ const Header = () => {
           </div>
           <Logo />
         </div>
-
-        <div className="flex rounded-full justify-end items-center gap-x-2 cursor-pointer">
-          <Profile />
-        </div>
+        <Sheet>
+          <SheetTrigger>
+            <div onClick={() => setOpenMobileProfileDropdown(true)} className="cursor-pointer">
+              <Profile />
+            </div>
+          </SheetTrigger>
+          {openMobileProfileDropdown && (
+            <SheetContent
+              showCloseButton={false}
+              className="fixed top-0 left-0 w-full h-full max-w-none! bg-white/5 backdrop-blur-[30px] z-150 transition-none transform-none"
+            >
+              <VisuallyHidden>
+                {/* Hidden title for accessibility */}
+                <SheetTitle>Mobile Profile Dropdown</SheetTitle>
+              </VisuallyHidden>
+              <MobileProfileDropdown
+                onClose={() => setOpenMobileProfileDropdown(false)}
+              />
+            </SheetContent>
+          )}
+        </Sheet>
       </header>
       <header className="hidden min-[960px]:block fixed left-0 top-0 z-50 h-20 w-[calc(100vw-20px)] bg-transparent">
         <div className="flex justify-end p-5 items-center gap-2">
@@ -50,8 +83,18 @@ const Header = () => {
               Upgrade
             </Button>
           </div>
-          <div className=" flex cursor-pointer">
-            <Profile />
+          <div className="flex">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="cursor-pointer">
+                <Profile />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="end"
+                className="p-0 rounded-[20px] border-[#1D2125] bg-[#16191C] overflow-hidden"
+              >
+                <ProfileDropdown />
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
