@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import Sidebar from "./Sidebar/Sidebar";
+import Header from "./Header/Header";
+import DesktopSidebar from "./Sidebar/DesktopSidebar";
 
 interface NavLinkProps {
   children: ReactNode;
@@ -8,8 +9,11 @@ interface NavLinkProps {
 const Navigation: React.FC<NavLinkProps> = ({ children }) => {
   return (
     <section className="flex">
-      <Sidebar />
-      <main className="flex-1">{children}</main>
+      <DesktopSidebar />
+      <main className="flex-1 pt-10 pl-50 max-[960px]:pl-0">
+        <Header />
+        {children}
+      </main>
     </section>
   );
 };
