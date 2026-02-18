@@ -1,10 +1,20 @@
-import { Avatar } from "@/components/ui/avatar";
+"use client";
+
+import RippleBadge from "./RippleBadge";
 
 const Profile = () => {
   return (
-    <Avatar className="w-9.5 h-9.5 leading-5 rounded-full flex items-center justify-center text-[#ffffff] border border-white/10 bg-[#16191C] text-[20px] text-center font-normal cursor-pointer">
-      Y
-    </Avatar>
+    <div className="relative w-10 h-10">
+      {/* Gradient Ring */}
+      <div className="absolute inset-0 rounded-full bg-[linear-gradient(312.58deg,#C800FF_17.25%,#FF2C9B_37.17%,#FF7B00_62.95%,#FF8504_75.03%,#FFD363_82.54%)] p-0.5">
+        {/* Inner Dark Circle */}
+        <div className="w-full h-full rounded-full bg-[#16191C] flex items-center justify-center text-white text-[20px] font-normal">
+          J
+        </div>
+      </div>
+
+      <RippleBadge />
+    </div>
   );
 };
 

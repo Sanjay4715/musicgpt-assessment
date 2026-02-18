@@ -31,13 +31,13 @@ const Header = () => {
           <Logo />
         </div>
 
-        <div className="flex rounded-full justify-end items-center gap-x-2">
+        <div className="flex rounded-full justify-end items-center gap-x-2 cursor-pointer">
           <Profile />
         </div>
       </header>
-      <header className="hidden min-[960px]:block fixed left-0 top-0 z-50 h-20 w-[calc(100vw-20px)] pointer-events-none bg-transparent">
+      <header className="hidden min-[960px]:block fixed left-0 top-0 z-50 h-20 w-[calc(100vw-20px)] bg-transparent">
         <div className="flex justify-end p-5 items-center gap-2">
-          <div className="min-w-72.25 flex gap-7 items-center z-10 p-3 bg-white/10 backdrop-blur-[5px] rounded-[12px] border border-[#262626] text-[#ffffff]">
+          <div className="min-w-72.25 flex gap-7 items-center z-10 p-3 bg-white/10 backdrop-blur-[5px] rounded-[12px] border border-[#262626] text-[#ffffff] cursor-pointer">
             <div>
               <div className="text-[14px] font-medium leading-[17.5px]">
                 Get unlimited AI Music
@@ -46,11 +46,13 @@ const Header = () => {
                 400 free credits left
               </div>
             </div>
-            <Button className="rounded-full bg-[#E4E6E8] text-[#16191C] px-3 py-0.75 h-8 flex text-[14px] leading-[17.5px] border-[#262626] font-normal">
+            <Button className="rounded-full bg-[#E4E6E8] text-[#16191C] px-3 py-0.75 h-8 flex text-[14px] leading-[17.5px] border-[#262626] font-normal cursor-pointer hover:bg-[#E4E6E8]/90">
               Upgrade
             </Button>
           </div>
-          <Profile />
+          <div className=" flex cursor-pointer">
+            <Profile />
+          </div>
         </div>
       </header>
     </>
