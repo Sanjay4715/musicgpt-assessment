@@ -1,4 +1,3 @@
-
 import HomeOpenIcon from "@/assets/HomeOpenIcon.svg";
 import HomeFilledIcon from "@/assets/HomeFilledIcon.svg";
 import CreateOpenIcon from "@/assets/CreateOpenIcon.svg";
