@@ -1,14 +1,14 @@
 "use client";
 import Logo from "@/components/Logo/Logo";
-import SearchOnSidebar from "../SearchOnSidebar/SearchOnSidebar";
-import HomeMenu from "../HomeMenu/HomeMenu";
-import LibraryMenu from "../LibraryMenu/LibraryMenu";
-import SidebarFooter from "../SidebarFooter/SidebarFooter";
+import SearchOnSidebar from "./SearchOnSidebar/SearchOnSidebar";
+import SidebarFooter from "./SidebarFooter/SidebarFooter";
+import HomeMenu from "./HomeMenu/HomeMenu";
+import LibraryMenu from "./LibraryMenu/LibraryMenu";
 
 const DesktopSidebar = () => {
   return (
-    <div className="relative block tab:hidden z-110">
-      <aside className="text-[#777A80] fixed z-1 hidden h-screen w-50 shrink-0 flex-col justify-between min-[960px]:flex bg-[rgba(255,255,255,0.03)]">
+    <div data-id="desktop-sidebar" className="relative block tab:hidden z-110">
+      <aside className="text-[#777A80] fixed z-1 hidden h-screen w-(--sidebar-width) shrink-0 flex-col justify-between min-[960px]:flex bg-[rgba(255,255,255,0.03)]">
         <div className="flex flex-col gap-8 p-4">
           <Logo />
           <SearchOnSidebar />
