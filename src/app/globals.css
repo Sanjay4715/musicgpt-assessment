@@ -84,6 +84,8 @@ body {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-width: 200px;
+  --sidebar-mobile-width: 300px
 }
 
 .dark {
@@ -130,36 +132,136 @@ body {
   }
 }
 
-
 @property --scrollbar-opacity {
   syntax: "<number>";
   inherits: true;
   initial-value: 0
 }
 
-.profile-popover-scrollbar::-webkit-scrollbar {
+.custom-scrollbar {
+  --thumb-color: rgba(128, 128, 128, var(--scrollbar-opacity));
+  transition: --scrollbar-opacity .4s;
+}
+
+.custom-scrollbar:hover {
+  --scrollbar-opacity: 1;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.profile-popover-scrollbar {
-  transition: --scrollbar-opacity .4s
-}
-
-.profile-popover-scrollbar:hover {
-  --scrollbar-opacity: 1;
-}
-
-.profile-popover-scrollbar::-webkit-scrollbar-track {
+.custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.profile-popover-scrollbar::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-thumb {
   background-clip: padding-box;
   border-radius: 3px;
-  background-color: rgba(128, 128, 128, var(--scrollbar-opacity))
+  background-color: var(--thumb-color);
 }
 
-.profile-popover-scrollbar::-webkit-scrollbar-thumb:hover {
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #003B55;
+}
+
+/* Variants */
+.profile-popover-scrollbar {
+  --thumb-color: rgba(128, 128, 128, var(--scrollbar-opacity));
+}
+
+.textarea-prompt-scrollbar {
+  --thumb-color: #3a3e42;
+}
+
+.rotating-border {
+  position: relative;
+  border-radius: 9999px;
+}
+
+.rotating-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle),
+      #303438 0%,
+      #303438 10%,
+      #dfe3ea 50%,
+      #ffffff 60%,
+      #dfe3ea 90%,
+      #303438 100%);
+
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  animation: rotateBorder 2s linear infinite;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorder {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.animate-border {
+  position: relative;
+  /* Gradient background */
+  background: linear-gradient(270deg, #FF7B16, #8800ff, #FF7B16);
+  background-size: 600% 600%;
+
+  /* Glow / box-shadow initial */
+  box-shadow: 40px 0 30px #FF7B16;
+  /* Animate both gradient and shadow */
+  animation: gradientWave 8s linear infinite;
+}
+
+/* Gradient movement */
+@keyframes gradientWave {
+  0% {
+    background-position: 0% 25%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Moving box-shadow */
+@keyframes shadowWave {
+  0% {
+    box-shadow: -10px 0 20px #FF7B16;
+  }
+
+  25% {
+    box-shadow: 10px 0 5px #FF7B16;
+  }
+
+  50% {
+    box-shadow: 0 0 20px #FF7B16;
+  }
+
+  75% {
+    box-shadow: 20px 0 20px #FF55AA;
+  }
+
+  100% {
+    box-shadow: 20px 0 20px #FF7B16;
+  }
 }

@@ -7,10 +7,10 @@ const TopupInfo = () => {
   return (
     <div
       data-id="credits"
-      className="group flex flex-row rounded-[12px] p-4 bg-[#D89C3A14] items-center"
+      className="group relative flex flex-row rounded-[12px] p-4 bg-[#D89C3A14] items-center"
     >
-      <div className="hidden group-hover:absolute group-hover:flex cursor-pointer top-60 right-3 min-[960px]:top-45 min-[960px]:right-4 w-6 h-6 rounded-full border border-[#303438] bg-[#16191C] text-[#505458]  items-center justify-center">
-        <Image src={CloseIcon} alt="close" width={10} height={10} />
+      <div className="hidden group-hover:absolute group-hover:flex cursor-pointer -top-2 -right-2 w-5 h-5 rounded-full border border-[#303438] bg-[#16191C] text-[#505458]  items-center justify-center">
+        <Image src={CloseIcon} alt="close" width={8} height={8} />
       </div>
       <div className="flex flex-col text-[14px] gap-1">
         <span className="flex flex-row gap-1.5 text-[#D89C3A] items-center">

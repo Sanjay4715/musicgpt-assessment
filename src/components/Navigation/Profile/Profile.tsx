@@ -1,6 +1,7 @@
 "use client";
 
-import RippleBadge from "./RippleBadge";
+import RippleBadge from "../RippleBadge/RippleBadge";
+
 
 interface ProfileProps {
   badge?: boolean;

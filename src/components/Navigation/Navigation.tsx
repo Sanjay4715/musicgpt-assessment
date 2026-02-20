@@ -8,9 +8,9 @@ interface NavLinkProps {
 
 const Navigation: React.FC<NavLinkProps> = ({ children }) => {
   return (
-    <section className="flex">
+    <section className="flex w-full">
       <DesktopSidebar />
-      <main className="flex-1 pt-10 pl-50 max-[960px]:pl-0">
+      <main className="relative z-0 ml-0 min-[960px]:ml-(--sidebar-width) flex-1 w-full pt-10 overflow-x-hidden">
         <Header />
         {children}
       </main>

@@ -1,12 +1,12 @@
-import { ChevronLeft, TriangleAlert } from "lucide-react";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import CreditInfo from "./CreditInfo/CreditInfo";
+import { ChevronLeft } from "lucide-react";
+import ProfileInfo from "../../GenerationItem/ProfileInfo/ProfileInfo";
+import CreditInfo from "../../GenerationItem/CreditInfo/CreditInfo";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import TopupInfo from "./TopupInfo/TopupInfo";
-import ServerBusyInfo from "./ServerBusyInfo/ServerBusyInfo";
-import InvalidPromptInfo from "./InvalidPromptInfo/InvalidPromptInfo";
+import TopupInfo from "../../GenerationItem/TopupInfo/TopupInfo";
+import InvalidPromptInfo from "../../GenerationItem/InvalidPromptInfo/InvalidPromptInfo";
 import GenerationItem from "@/components/GenerationItem/GenerationItem";
+import ProcessinggenerationItem from "@/components/GenerationItem/ProcessingGenerationItem";
+import ServerBusyInfo from "@/components/GenerationItem/ServerBusyInfo/ServerBusyInfo";
 
 interface MobileProfileDropdownProps {
   onClose: () => void;
@@ -14,7 +14,10 @@ interface MobileProfileDropdownProps {
 
 const MobileProfileDropdown = ({ onClose }: MobileProfileDropdownProps) => {
   return (
-    <div className="flex flex-col p-5 h-screen gap-[20px] overflow-auto profile-popover-scrollbar">
+    <div
+      data-id="mobile-profile-dropdown"
+      className="flex flex-col p-5 h-screen gap-[20px] overflow-auto custom-scrollbar profile-popover-scrollbar"
+    >
       <div
         className="sticky top-0 z-10 flex flex-row gap-1.25 items-center text-[#777A80] cursor-pointer"
         onClick={() => onClose()}
@@ -30,6 +33,7 @@ const MobileProfileDropdown = ({ onClose }: MobileProfileDropdownProps) => {
         <ServerBusyInfo />
         <InvalidPromptInfo />
         <GenerationItem />
+        <ProcessinggenerationItem />
       </div>
     </div>
   );

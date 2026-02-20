@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function RippleBadge() {
   return (
-    <div className="relative w-10 h-10">
+    <div data-id="badge-ripple" className="relative w-10 h-10">
       {/* Badge */}
       <motion.div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#6BFFAC] flex items-center justify-center text-black text-[10px] font-semibold shadow-lg">
         2

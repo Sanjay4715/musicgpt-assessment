@@ -5,8 +5,8 @@ import Image from "next/image";
 const InvalidPromptInfo = () => {
   return (
     <div className="flex flex-row items-start gap-3 p-2 rounded-[12px] bg-transparent">
-      <div className="shrink-0 bg-[#D89C3A] w-15 h-15 rounded-[16px] flex items-center justify-center relative">
-        😢
+      <div className="shrink-0 bg-[#D89C3A] w-15 h-15 rounded-[16px] flex items-center justify-center relative text-[32px]">
+        🥲
       </div>
       <div className="flex flex-col gap-2 text-white text-[14px]">
         <span className="font-semibold">Invalid prompt</span>
