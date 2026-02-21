@@ -1,6 +1,7 @@
+import { GeneratedList } from "@/interface/GeneratedItems";
 import { TriangleAlert } from "lucide-react";
 
-const ServerBusyInfo = () => {
+const ServerBusyInfo = ({ ...generatedItemProps }: GeneratedList) => {
   return (
     <div
       data-id="error-server"

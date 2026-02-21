@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { generatedAudioMockData } from "../mockData/generatedAudioMockData";
+import { unprocessedGenerationMockData } from "../mockData/unprocessedGenerationMockData";
 
 const GET = async () => {
   return NextResponse.json({
     status: 200,
-    audios: generatedAudioMockData,
+    rows: unprocessedGenerationMockData,
   });
 };
 
