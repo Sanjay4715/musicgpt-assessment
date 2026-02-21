@@ -1,11 +1,20 @@
+"use client";
 import GenerationItem from "@/components/GenerationItem/GenerationItem";
 import ProcessingGenerationItem from "@/components/GenerationItem/ProcessingGenerationItem";
 import InvalidPromptInfo from "@/components/GenerationItem/InvalidPromptInfo/InvalidPromptInfo";
 import TopupInfo from "@/components/GenerationItem/TopupInfo/TopupInfo";
 import PromptSection from "@/components/PromptSection/PromptSection";
 import ServerBusyInfo from "@/components/GenerationItem/ServerBusyInfo/ServerBusyInfo";
+import { usePresetPromptStore } from "@/store/usePresetPromptStore";
+import { useEffect } from "react";
 
 const Create = () => {
+  const { getPrompts } = usePresetPromptStore();
+
+  useEffect(() => {
+    getPrompts();
+  }, [getPrompts]);
+
   return (
     <div className="w-full min-h-[90vh] px-4 md:px-6 lg:px-8 flex flex-col justify-center">
       <PromptSection />
