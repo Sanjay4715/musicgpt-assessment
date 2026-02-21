@@ -1,6 +1,16 @@
+"use client";
+
 import PromptSection from "@/components/PromptSection/PromptSection";
+import { usePresetPromptStore } from "@/store/usePresetPromptStore";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { getPrompts } = usePresetPromptStore();
+
+  useEffect(() => {
+    getPrompts();
+  }, [getPrompts]);
+
   return (
     <div className="w-full min-h-[90vh] px-4 md:px-6 lg:px-8 flex flex-col justify-center">
       <PromptSection />

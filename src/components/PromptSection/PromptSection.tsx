@@ -8,8 +8,16 @@ import {
 } from "lucide-react";
 import TextareaAutosize from "../TextareaAutosize/TextareaAutosize";
 import { Button } from "../ui/button";
+import PromptRandomizer from "../PromptRandomizer/PromptRandomizer";
+import { useState } from "react";
 
 const PromptSection = () => {
+  const [prompt, setPrompt] = useState<string>("");
+
+  const handlePromptSubmit = () => {
+    console.log("submitted", prompt);
+  };
+
   return (
     <div
       data-id="prompt-section"
@@ -29,7 +37,11 @@ const PromptSection = () => {
         >
           <div className="bg-[#1d2125] rounded-[32px] shadow-xl">
             <div className="flex flex-col overflow-hidden">
-              <TextareaAutosize />
+              <TextareaAutosize
+                prompt={prompt}
+                setPrompt={setPrompt}
+                handleSubmit={handlePromptSubmit}
+              />
               <div className="w-full items-center px-3 max-[460px]:my-5 my-3 flex flex-row max-[460px]:flex-col gap-y-2 max-[460px]:gap-y-3 max-[460px]:items-start bottom-3 left-3 right-3 h-20.5 sm:h-10 text-white">
                 <div className="flex gap-2">
                   <Button className="w-10 h-10 px-4 py-2 rounded-full items-center bg-transparent border border-[#303438] hover:bg-[#ffffff]/10 cursor-pointer">
@@ -54,8 +66,11 @@ const PromptSection = () => {
                     </Button>
                   </div>
 
-                  <Button className="max-[460px]:ml-auto w-10 h-10 flex items-center justify-center rounded-full bg-[#44484C] border border-[#303438] transition-all duration-300 hover:scale-110 active:scale-100">
-                    <ArrowRight size={20} className="text-[#212529]" />
+                  <Button
+                    className={`max-[460px]:ml-auto w-10 h-10 flex items-center justify-center rounded-full bg-[#ffffff] hover:bg-[#ffffff] border border-[#303438] transition-all duration-300 hover:scale-110 active:scale-100 ${prompt === "" ? "disabled cursor-not-allowed" : "cursor-pointer"}`}
+                    onClick={prompt !== "" ? handlePromptSubmit : () => {}}
+                  >
+                    <ArrowRight size={24} className="text-[#212529]" />
                   </Button>
                 </div>
               </div>
@@ -68,6 +83,10 @@ const PromptSection = () => {
             <span>MusicGPT v6 Pro - Our latest AI audio model</span>
             <span className="underline">Example prompts</span>
           </div>
+        </div>
+
+        <div className="mt-5">
+          <PromptRandomizer setPrompt={setPrompt} />
         </div>
       </div>
     </div>
