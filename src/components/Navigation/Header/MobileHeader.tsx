@@ -54,7 +54,6 @@ const MobileHeader = () => {
               className="fixed top-0 left-0 w-full h-full max-w-none! bg-white/5 backdrop-blur-[30px] z-150 transition-none transform-none"
             >
               <VisuallyHidden>
-                {/* Hidden title for accessibility */}
                 <SheetTitle>Mobile Profile Dropdown</SheetTitle>
               </VisuallyHidden>
               <MobileProfileDropdown

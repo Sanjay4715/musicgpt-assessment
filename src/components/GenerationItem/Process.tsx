@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+import { ProcessProps } from "@/interface/GenerationInterface";
 import { Button } from "../ui/button";
-
-interface ProcessProps {
-  title: string;
-  version: string;
-  progress: number;
-}
+import { labelProcessing } from "@/constants/constants";
 
 const Process = ({ title, version, progress }: ProcessProps) => {
+  const getLabel = (progress: number) => {
+    const findLabel = labelProcessing.find(
+      (e) => e.start <= progress && e.end >= progress,
+    );
+    return findLabel?.label;
+  };
+
   return (
     <div className="relative w-full flex flex-row gap-3 p-2 rounded-[12px] items-center cursor-pointer hover:bg-[#1d2125] hover:rounded-[24px] transition-all overflow-hidden">
       {/* Progress background fill */}
@@ -34,7 +33,7 @@ const Process = ({ title, version, progress }: ProcessProps) => {
       <div className="relative z-10 flex flex-col gap-1 flex-1 min-w-0">
         <span className="text-[#E4E6E8] truncate text-sm">{title}</span>
         <span className="text-[#898C92] truncate text-sm">
-          Processing your audio...
+          {getLabel(progress)}
         </span>
       </div>
 

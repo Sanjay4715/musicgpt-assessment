@@ -13,6 +13,7 @@ const Create = () => {
         <h2 className="text-[18px] font-semibold text-[#E4E6E8]">
           Recent generations
         </h2>
+        {/* <DesktopPlayer /> */}
         <div className="flex flex-col gap-1">
           <TopupInfo />
           <ServerBusyInfo />
