@@ -2,10 +2,14 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Textarea } from "../ui/textarea";
 import VerticalTextCarousel from "../VerticalTextCaraousel/VerticalTextCarousel";
+import { TextareaAutosizeProps } from "@/interface/Textarea";
 
-const TextareaAutosize = () => {
+const TextareaAutosize = ({
+  prompt,
+  setPrompt,
+  handleSubmit,
+}: TextareaAutosizeProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState("");
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined"
       ? window.matchMedia("(max-width: 639px)").matches
@@ -37,7 +41,7 @@ const TextareaAutosize = () => {
   return (
     <div className="relative w-full">
       {/* Animated placeholder overlay */}
-      {!value && (
+      {!prompt && (
         <div className="absolute left-0 w-full px-5 py-5 text-[16px] text-gray-500 flex items-start overflow-hidden pointer-events-none">
           <VerticalTextCarousel />
         </div>
@@ -45,8 +49,16 @@ const TextareaAutosize = () => {
 
       <Textarea
         ref={textareaRef}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={prompt}
+        onChange={(e) => setPrompt(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            if (prompt.trim() !== "") {
+              handleSubmit();
+            }
+          }
+        }}
         onInput={resizeTextarea}
         spellCheck
         className="
