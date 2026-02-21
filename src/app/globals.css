@@ -175,6 +175,15 @@ body {
   --thumb-color: #3a3e42;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .rotating-border {
   position: relative;
   border-radius: 9999px;
@@ -223,9 +232,9 @@ body {
   background-size: 600% 600%;
 
   /* Glow / box-shadow initial */
-  box-shadow: 40px 0 30px #FF7B16;
+  box-shadow: 0 0 30px #FF7B16;
   /* Animate both gradient and shadow */
-  animation: gradientWave 8s linear infinite;
+  animation: gradientWave 8s linear infinite, shadowWave 8s linear infinite;
 }
 
 /* Gradient movement */
@@ -264,4 +273,30 @@ body {
   100% {
     box-shadow: 20px 0 20px #FF7B16;
   }
+}
+
+.volume-slider [data-slot="slider-range"] {
+  background-color: white;
+  height: 6px;
+}
+
+.volume-slider [data-slot="slider-thumb"] {
+  height: 12px;
+  width: 12px;
+  box-shadow: none;
+  background-color: white;
+}
+
+.volume-slider [data-slot="slider-track"] {
+  background-color: #262626;
+  height: 6px;
+  border-radius: 12px;
+}
+
+.custom-top-bar .bg-muted {
+  background-color: blue;
+  height: 5px;
+  width: 40px;
+  border-radius: 10px;
+  background-color: #44484C;
 }
