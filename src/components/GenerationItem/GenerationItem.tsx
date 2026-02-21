@@ -5,8 +5,12 @@ import PlayIcon from "@/assets/PlayIcon.svg";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { ArrowDownToLine, Ellipsis, ThumbsDown, ThumbsUp } from "lucide-react";
+import { GeneratedList } from "@/interface/GeneratedItems";
+import ImageThumbnail from "../ImageThumbnail/ImageThumbnail";
 
-const GenerationItem = () => {
+const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
+  const { id, title, image_custom_thumbnail, version_string, input_prompt } =
+    generationItemProps;
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -16,15 +20,16 @@ const GenerationItem = () => {
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
+  const getVersion = () => {
+    return version_string === "Version 1" ? "V1" : "V2";
+  };
+
   return (
     <div className="group flex flex-row gap-3 p-2 rounded-[12px] items-center cursor-pointer hover:bg-[#1d2125] hover:rounded-[24px] transition-all overflow-hidden">
       <div className="shrink-0 w-14 h-14 rounded-[16px] flex items-center justify-center relative">
-        <Image
-          src={GenerationImage}
-          alt="generation"
-          width={80}
-          height={80}
-          className="object-cover rounded-[16px]"
+        <ImageThumbnail
+          src={image_custom_thumbnail ?? GenerationImage}
+          alt={`${title}-${id}`}
         />
         {/* Overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -34,16 +39,9 @@ const GenerationItem = () => {
         </div>
       </div>
       <div className="flex flex-col gap-1 text-[14px] font-normal flex-1 min-w-0">
-        <span className="text-[#E4E6E8] truncate text-sm">
-          Out in the street
-        </span>
-        <span className="text-[#898C92] text-sm line-clamp-1 break-words">
-          With this lyrics [Intro] Whatever you think… Office ko scene ready
-          bro… Gwache Solti on duty… Kaam chai pending ho… 😏 [Verse 1 – Office
-          Madness] Whatever you think, gara ASAP bro Experienced bhayera ni k
-          ho, kaam chai slow Testo haina bhai, saas ferne time ni chaina Yeta
-          meeting uta meeting, kaam garne chai haina Bonding bonding bhanchau,
-          bonding bhaneko k ho? Proper ticket update kun juni ma dine ho?
+        <span className="text-[#E4E6E8] truncate text-sm">{title}</span>
+        <span className="text-[#898C92] text-sm line-clamp-1 wrap-break-word">
+          {input_prompt}
         </span>
       </div>
       {/* Actions */}
@@ -57,11 +55,10 @@ const GenerationItem = () => {
             </>
           )}
           <Button className="w-8 h-6 rounded-[8px] border border-[#5D6165] bg-transparent hover:bg-transparent">
-            v1
+            {getVersion()}
           </Button>
+          <ArrowDownToLine size={20} className="hover:text-white" />
         </div>
-        {isMobile && <ArrowDownToLine size={20} className="hover:text-white" />}
-        {/* Always visible */}
         <Ellipsis size={24} />
       </div>
     </div>

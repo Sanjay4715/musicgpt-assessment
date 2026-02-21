@@ -7,13 +7,17 @@ import PromptSection from "@/components/PromptSection/PromptSection";
 import ServerBusyInfo from "@/components/GenerationItem/ServerBusyInfo/ServerBusyInfo";
 import { usePresetPromptStore } from "@/store/usePresetPromptStore";
 import { useEffect } from "react";
+import { useGeneratedListStore } from "@/store/useGeneratedListStore";
+import GeneratedListItem from "@/components/GeneratedListItem/GeneratedListItem";
 
 const Create = () => {
   const { getPrompts } = usePresetPromptStore();
+  const { sortedGeneratedList, getGeneratedAudios } = useGeneratedListStore();
 
   useEffect(() => {
     getPrompts();
-  }, [getPrompts]);
+    getGeneratedAudios();
+  }, [getPrompts, getGeneratedAudios]);
 
   return (
     <div className="w-full min-h-[90vh] px-4 md:px-6 lg:px-8 flex flex-col justify-center">
@@ -24,9 +28,9 @@ const Create = () => {
         </h2>
         <div className="flex flex-col gap-1">
           <TopupInfo />
-          <ServerBusyInfo />
-          <InvalidPromptInfo />
-          <GenerationItem />
+          {sortedGeneratedList.map((generatedItem) => (
+            <GeneratedListItem key={generatedItem.id} {...generatedItem} />
+          ))}
           <ProcessingGenerationItem />
         </div>
       </div>
