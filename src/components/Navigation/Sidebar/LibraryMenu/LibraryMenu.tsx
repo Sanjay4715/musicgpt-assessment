@@ -22,7 +22,7 @@ const LibraryMenu = () => {
   ];
 
   return (
-    <div className="flex flex-col items-start gap-0.75 max-[960px]:gap-2">
+    <div className="flex flex-col items-start gap-0.75 max-[960px]:gap-2 overflow-auto custom-scrollbar profile-popover-scrollbar">
       <div className="px-4 text-sm font-medium leading-9 text-[#777A80]">
         Library
       </div>

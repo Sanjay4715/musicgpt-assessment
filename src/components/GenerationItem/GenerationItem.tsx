@@ -4,13 +4,7 @@ import GenerationImage from "@/assets/Generation.png";
 import PlayIcon from "@/assets/PlayIcon.svg";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
-import {
-  ArrowDownToLine,
-  Ellipsis,
-  Play,
-  ThumbsDown,
-  ThumbsUp,
-} from "lucide-react";
+import { ArrowDownToLine, Ellipsis, ThumbsDown, ThumbsUp } from "lucide-react";
 
 const GenerationItem = () => {
   const [isMobile, setIsMobile] = useState(false);
