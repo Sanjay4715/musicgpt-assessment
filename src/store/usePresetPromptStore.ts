@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PromptState, PromptStore } from "@/interface/PresetPrompts";
+import {  PromptStore } from "@/interface/PresetPrompts";
 import { createStore } from "./createStore";
 import api from "@/lib/api";
 
