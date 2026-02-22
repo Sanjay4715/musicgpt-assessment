@@ -7,10 +7,19 @@ import { useEffect, useState } from "react";
 import { ArrowDownToLine, Ellipsis, ThumbsDown, ThumbsUp } from "lucide-react";
 import { GeneratedList } from "@/interface/GeneratedItems";
 import ImageThumbnail from "../ImageThumbnail/ImageThumbnail";
+import { getVersion } from "@/common";
+import RippleBadge from "../Navigation/RippleBadge/RippleBadge";
+import { STATUS_TYPE } from "@/enums";
 
 const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
-  const { id, title, image_custom_thumbnail, version_string, input_prompt } =
-    generationItemProps;
+  const {
+    id,
+    title,
+    image_custom_thumbnail,
+    version_string,
+    input_prompt,
+    status,
+  } = generationItemProps;
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -20,10 +29,6 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  const getVersion = () => {
-    return version_string === "Version 1" ? "V1" : "V2";
-  };
-
   return (
     <div className="group flex flex-row gap-3 p-2 rounded-[12px] items-center cursor-pointer hover:bg-[#1d2125] hover:rounded-[24px] transition-all overflow-hidden">
       <div className="shrink-0 w-14 h-14 rounded-[16px] flex items-center justify-center relative">
@@ -31,6 +36,9 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
           src={image_custom_thumbnail ?? GenerationImage}
           alt={`${title}-${id}`}
         />
+        {status === STATUS_TYPE.SUCCESS && (
+          <RippleBadge isProfileBadge={false} />
+        )}
         {/* Overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="bg-white/5 backdrop-blur-[20px] w-10 h-10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -54,9 +62,11 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
               <ThumbsDown size={20} className="hover:text-white" />
             </>
           )}
-          <Button className="w-8 h-6 rounded-[8px] border border-[#5D6165] bg-transparent hover:bg-transparent">
-            {getVersion()}
-          </Button>
+          {version_string && (
+            <Button className="w-8 h-6 rounded-[8px] border border-[#5D6165] bg-transparent hover:bg-transparent">
+              {getVersion(version_string)}
+            </Button>
+          )}
           <ArrowDownToLine size={20} className="hover:text-white" />
         </div>
         <Ellipsis size={24} />

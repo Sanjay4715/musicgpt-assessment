@@ -1,6 +1,7 @@
 import { GeneratedList, GeneratedListStore } from "@/interface/GeneratedItems";
 import { createStore } from "./createStore";
 import api from "@/lib/api";
+import { sortArrayByCreatedAt } from "@/common";
 
 const getGeneratedAudios =
   (set: (fn: (state: GeneratedListStore) => GeneratedListStore) => void) =>
@@ -37,11 +38,7 @@ const getGeneratedAudios =
         console.error("Unprocessed API failed");
       }
 
-      const sortedGeneratedList = generatedList.sort(
-        (a, b) =>
-          (new Date(b.created_at).getTime() || 0) -
-          (new Date(a.created_at).getTime() || 0),
-      );
+      const sortedGeneratedList = sortArrayByCreatedAt(generatedList);
       set((state) => ({
         ...state,
         sortedGeneratedList,

@@ -5,10 +5,12 @@ import ProfileInfo from "../../GenerationItem/ProfileInfo/ProfileInfo";
 import CreditInfo from "../../GenerationItem/CreditInfo/CreditInfo";
 import { Separator } from "@/components/ui/separator";
 import TopupInfo from "../../GenerationItem/TopupInfo/TopupInfo";
-import ProcessinggenerationItem from "@/components/GenerationItem/ProcessingGenerationItem";
 import { useGeneratedListStore } from "@/store/useGeneratedListStore";
 import GeneratedListItem from "@/components/GeneratedListItem/GeneratedListItem";
 import { useEffect } from "react";
+import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
+import { sortArrayByCreatedAt } from "@/common";
+import ProcessingGenerationItem from "@/components/GenerationItem/ProcessingGenerationItem";
 
 interface MobileProfileDropdownProps {
   onClose: () => void;
@@ -16,6 +18,7 @@ interface MobileProfileDropdownProps {
 
 const MobileProfileDropdown = ({ onClose }: MobileProfileDropdownProps) => {
   const { sortedGeneratedList, getGeneratedAudios } = useGeneratedListStore();
+  const { latestStatusData } = useLiveGenerationStore();
 
   useEffect(() => {
     getGeneratedAudios();
@@ -38,10 +41,13 @@ const MobileProfileDropdown = ({ onClose }: MobileProfileDropdownProps) => {
       <Separator className="bg-[#ffffff0d] border border-[#ffffff0d] max-[960px]:bg-[#ffffff0d]" />
       <div className="flex flex-col gap-1.5">
         <TopupInfo />
+
+        {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
+          <ProcessingGenerationItem key={data.id} {...data} />
+        ))}
         {sortedGeneratedList.map((generatedItem) => (
           <GeneratedListItem key={generatedItem.id} {...generatedItem} />
         ))}
-        <ProcessinggenerationItem />
       </div>
     </div>
   );

@@ -15,5 +15,5 @@ export interface CategorizedPrompt {
 
 export interface PromptStore {
   prompts: PromptState[];
-  getPrompts(): Promise<void>; // <-- rename here (was getPropmts)
+  getPrompts(): Promise<void>;
 }

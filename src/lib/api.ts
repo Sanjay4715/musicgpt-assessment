@@ -5,8 +5,20 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
+const getBaseURL = () => {
+  if (process.env.NEXT_PUBLIC_API_BASE_URL) {
+    return process.env.NEXT_PUBLIC_API_BASE_URL;
+  }
+
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
+
+  return "http://localhost:3000";
+};
+
 const api: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000",
+  baseURL: getBaseURL(),
   headers: {
     "Content-Type": "application/json",
   },

@@ -10,12 +10,13 @@ import TextareaAutosize from "../TextareaAutosize/TextareaAutosize";
 import { Button } from "../ui/button";
 import PromptRandomizer from "../PromptRandomizer/PromptRandomizer";
 import { useState } from "react";
+import { PromptSectionprops } from "@/interface/PromptSection";
 
-const PromptSection = () => {
+const PromptSection = ({ submitPrompt }: PromptSectionprops) => {
   const [prompt, setPrompt] = useState<string>("");
 
   const handlePromptSubmit = () => {
-    console.log("submitted", prompt);
+    submitPrompt(prompt);
   };
 
   return (
