@@ -16,6 +16,7 @@ const PromptSection = ({ submitPrompt }: PromptSectionprops) => {
   const [prompt, setPrompt] = useState<string>("");
 
   const handlePromptSubmit = () => {
+    setPrompt("");
     submitPrompt(prompt);
   };
 

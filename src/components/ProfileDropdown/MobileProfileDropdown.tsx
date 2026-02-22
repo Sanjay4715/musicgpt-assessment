@@ -1,16 +1,16 @@
 "use client";
 
 import { ChevronLeft } from "lucide-react";
-import ProfileInfo from "../../GenerationItem/ProfileInfo/ProfileInfo";
-import CreditInfo from "../../GenerationItem/CreditInfo/CreditInfo";
 import { Separator } from "@/components/ui/separator";
-import TopupInfo from "../../GenerationItem/TopupInfo/TopupInfo";
 import { useGeneratedListStore } from "@/store/useGeneratedListStore";
 import GeneratedListItem from "@/components/GeneratedListItem/GeneratedListItem";
 import { useEffect } from "react";
 import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
 import { sortArrayByCreatedAt } from "@/common";
 import ProcessingGenerationItem from "@/components/GenerationItem/ProcessingGenerationItem";
+import ProfileInfo from "../GenerationItem/ProfileInfo/ProfileInfo";
+import CreditInfo from "../GenerationItem/CreditInfo/CreditInfo";
+import TopupInfo from "../GenerationItem/TopupInfo/TopupInfo";
 
 interface MobileProfileDropdownProps {
   onClose: () => void;

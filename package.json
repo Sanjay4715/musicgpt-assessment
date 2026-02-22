@@ -4,9 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev:next": "next dev",
-    "dev:server": "node --loader ts-node/esm server.ts",
-    "dev": "concurrently -n next,server -c blue,green \"npm run dev:next\" \"npm run dev:server\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

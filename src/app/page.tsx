@@ -1,15 +1,13 @@
 "use client";
 
 import PromptSection from "@/components/PromptSection/PromptSection";
-import { Button } from "@/components/ui/button";
 import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
 import { usePresetPromptStore } from "@/store/usePresetPromptStore";
 import { useEffect } from "react";
 
 const Home = () => {
   const { getPrompts } = usePresetPromptStore();
-  const { latestStatusData, submitPrompt, getStatus } =
-    useLiveGenerationStore();
+  const { submitPrompt, getStatus } = useLiveGenerationStore();
 
   useEffect(() => {
     getPrompts();
