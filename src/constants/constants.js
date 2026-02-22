@@ -4,6 +4,7 @@ import SpeakText from "@/assets/SpeakText.svg";
 import ChangeFile from "@/assets/ChangeFile.svg";
 import Random from "@/assets/Random.svg";
 import { alignEnum } from "@/interface/PromptRandomizer";
+import { STATUS_TYPE } from "@/enums";
 
 export const labelProcessing = [
   {
@@ -54,4 +55,45 @@ export const promptRandomOptions = [
   { label: "Speak Text", icon: SpeakText, align: alignEnum.CENTER },
   { label: "Change File", icon: ChangeFile, align: alignEnum.CENTER },
   { label: "Random", icon: Random, align: alignEnum.END },
+];
+
+export const adjectives = [
+  "Lonely",
+  "Midnight",
+  "Golden",
+  "Broken",
+  "Electric",
+  "Silent",
+  "Wild",
+  "Neon",
+  "Burning",
+  "Fading",
+];
+
+export const nouns = [
+  "Dreams",
+  "Heart",
+  "Sky",
+  "Echo",
+  "Fire",
+  "Shadows",
+  "River",
+  "Stars",
+  "Waves",
+  "Memory",
+];
+
+export const versions = ["Version 1", "Version 2"];
+
+export const statusAndProgress = [
+  {
+    status: STATUS_TYPE.CONNECTING,
+    progress: [0],
+  },
+  { status: STATUS_TYPE.STARTING, progress: [1, 3] },
+  { status: STATUS_TYPE.STARTED, progress: [4, 19] },
+  { status: STATUS_TYPE.GENERATING, progress: [20, 95] },
+  { status: STATUS_TYPE.PENDING, progress: [96, 97] },
+  { status: STATUS_TYPE.COMPLETED, progress: [98, 99] },
+  { status: STATUS_TYPE.SUCCESS, progress: [100] },
 ];

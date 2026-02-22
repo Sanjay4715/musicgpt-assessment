@@ -1,7 +1,7 @@
 "use client";
 
+import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
 import RippleBadge from "../RippleBadge/RippleBadge";
-
 
 interface ProfileProps {
   badge?: boolean;
@@ -12,6 +12,8 @@ const Profile = ({
   badge = true,
   isFromProfilePopover = false,
 }: ProfileProps) => {
+  const { latestStatusData } = useLiveGenerationStore();
+
   return (
     <div
       className={`relative ${isFromProfilePopover ? "w-14 h-14" : "w-10 h-10"}`}
@@ -23,7 +25,9 @@ const Profile = ({
           J
         </div>
       </div>
-      {badge && <RippleBadge />}
+      {badge && latestStatusData && (
+        <RippleBadge label={latestStatusData.length} />
+      )}
     </div>
   );
 };
