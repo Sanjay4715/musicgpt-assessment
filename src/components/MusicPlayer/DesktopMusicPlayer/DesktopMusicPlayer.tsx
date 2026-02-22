@@ -6,8 +6,14 @@ import MusicThumbnailAndTitle from "../MusicThumbnailAndTitle/MusicThumbnailAndT
 import MusicFavoriteAndShare from "../MusicfavoriteAndShare/MusicFavoriteAndShare";
 import MusicPlayerOptions from "../MusicPlayerOptions/MusicPlayerOptions";
 import ExpandedArea from "../ExpandedArea/ExpandedArea";
+import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 
 const DesktopMusicPlayer = () => {
+  const { musicToPlay, currentTimestamp, setCurrentTimestamp } =
+    useMusicPlayerStore();
+
+  const { file_output_0, audio_length_ms } = musicToPlay;
+
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -15,8 +21,8 @@ const DesktopMusicPlayer = () => {
   const timelineRef = useRef<HTMLButtonElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const [duration, setDuration] = useState<number>(0);
-  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(audio_length_ms ?? 0);
+  const [currentTime, setCurrentTime] = useState<number>(currentTimestamp);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [volume, setVolume] = useState<number>(50);
 
@@ -26,7 +32,10 @@ const DesktopMusicPlayer = () => {
     if (!audio) return;
 
     const onUpdate = () => {
-      if (!isDragging) setCurrentTime(audio.currentTime);
+      if (!isDragging) {
+        setCurrentTime(audio.currentTime);
+        setCurrentTimestamp(audio.currentTime);
+      }
     };
     const setMeta = () => {
       if (!isNaN(audio.duration)) {
@@ -60,6 +69,7 @@ const DesktopMusicPlayer = () => {
     const newTime = percent * duration;
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
+    setCurrentTimestamp(newTime);
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -117,11 +127,7 @@ const DesktopMusicPlayer = () => {
       style={{ zIndex: 70 }}
     >
       <div className="relative mx-auto flex w-[calc(100%-28px)] flex-col items-center md:w-[calc(100%-20px)] md:max-w-[740px] xl:max-w-[900px]">
-        <audio
-          ref={audioRef}
-          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          preload="metadata"
-        />
+        <audio ref={audioRef} src={file_output_0} preload="metadata" />
 
         <div
           className={`w-full relative rounded-[24px] transition-all duration-500 ease-in-out bg-white/5 backdrop-blur-xl border border-white/10 pointer-events-auto shadow-2xl ${isExpanded ? "h-[412px]" : "h-[88px]"}`}

@@ -10,6 +10,7 @@ import ImageThumbnail from "../ImageThumbnail/ImageThumbnail";
 import { getVersion } from "@/common";
 import RippleBadge from "../Navigation/RippleBadge/RippleBadge";
 import { STATUS_TYPE } from "@/enums";
+import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 
 const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
   const {
@@ -21,6 +22,8 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
     status,
   } = generationItemProps;
   const [isMobile, setIsMobile] = useState(false);
+  const { isPlayerOn, toggleMusicPlayer, addMusicToPlayer } =
+    useMusicPlayerStore();
 
   useEffect(() => {
     const checkScreen = () => setIsMobile(window.innerWidth < 960);
@@ -29,8 +32,16 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
+  const handleMusicPlayer = (item: GeneratedList) => {
+    addMusicToPlayer(generationItemProps);
+    toggleMusicPlayer(true);
+  };
+
   return (
-    <div className="group flex flex-row gap-3 p-2 rounded-[12px] items-center cursor-pointer hover:bg-[#1d2125] hover:rounded-[24px] transition-all overflow-hidden">
+    <div
+      className="group flex flex-row gap-3 p-2 rounded-[12px] items-center cursor-pointer hover:bg-[#1d2125] hover:rounded-[24px] transition-all overflow-hidden"
+      onClick={() => handleMusicPlayer(generationItemProps)}
+    >
       <div className="shrink-0 w-14 h-14 rounded-[16px] flex items-center justify-center relative">
         <ImageThumbnail
           src={image_custom_thumbnail ?? GenerationImage}

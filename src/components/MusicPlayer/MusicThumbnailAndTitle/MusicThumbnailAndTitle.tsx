@@ -5,11 +5,17 @@ import Image2 from "@/assets/Image2.webp";
 import { Edit2Icon } from "lucide-react";
 import { Input } from "../../ui/input";
 import { MusicThumbailAndTitleProps } from "@/interface/Music";
+import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 
 const MusicThumbnailAndTitle = ({
   isMobilePlayer = false,
 }: MusicThumbailAndTitleProps) => {
-  const [value, setValue] = useState("The Satirical Echo of the world");
+  const { musicToPlay } = useMusicPlayerStore();
+
+  const { title, image_custom_thumbnail } = musicToPlay;
+
+  const [value, setValue] = useState(title ?? "");
+  const [error, setError] = useState(false);
   const [isHoveredOnImage, setIsHoveredOnImage] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -28,11 +34,18 @@ const MusicThumbnailAndTitle = ({
           className={`group relative h-20 w-20 ${isMobilePlayer ? "rounded-[10px]" : "rounded-[16px]"} flex items-center`}
         >
           <Image
-            src={Image2}
-            alt="generation"
+            src={
+              error || !image_custom_thumbnail
+                ? "/fallback.png"
+                : image_custom_thumbnail
+            }
+            alt="mobile-thumbnail"
             width={80}
             height={80}
             className={`object-cover ${isMobilePlayer ? "rounded-[10px]" : "rounded-[16px]"}`}
+            onError={() => {
+              setError(true);
+            }}
           />
           {!isMobilePlayer && isHoveredOnImage && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100">
@@ -49,7 +62,7 @@ const MusicThumbnailAndTitle = ({
       >
         {isMobilePlayer ? (
           <div className="truncate text-[14px] font-medium leading-tight text-white">
-            The world of the world
+            {title}
           </div>
         ) : (
           <Input

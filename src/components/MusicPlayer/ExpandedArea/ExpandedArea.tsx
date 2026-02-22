@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { useCallback, useEffect, useRef, useState } from "react";
 import CommentItem from "../CommentItem/CommentItem";
+import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 
 interface Comment {
   id: number;
@@ -39,6 +40,8 @@ const sampleComments: Comment[] = [
 ];
 
 const ExpandedArea = () => {
+  const { musicToPlay } = useMusicPlayerStore();
+  const { title, lyrics_output } = musicToPlay;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [commentValue, setCommentValue] = useState("");
 
@@ -108,103 +111,9 @@ const ExpandedArea = () => {
       <div className="shrink-0 flex-1 overflow-y-auto custom-scrollbar">
         <div className="ml-5 text-white overflow-y-auto">
           <div className="text-white no-scrollbar line-clamp-6 mt-3 mb-5">
-            nepali sattire
+            {title}
           </div>
-          <div className="text-[#777A80]">
-            <section>
-              <h4>[Intro]</h4>
-              <p>
-                [Madal drum solo starts with a heavy electronic sub-bass kick]
-              </p>
-              <p>[Sharp Sarangi melody plays a fast, repetitive hook]</p>
-              <p>(हो हो!)</p>
-              <p>(हेर मलाई!)</p>
-            </section>
-
-            <section>
-              <h4>[Verse 1]</h4>
-              <p>बजारको नयाँ क्रिम किनेर ल्याएँ</p>
-              <p>अनुहारमा बाक्लो लेप मैले दलेँ</p>
-              <p>हिजोसम्म त म अलि कालो थिएँ</p>
-              <p>आज त म विदेशी जस्तै भएँ</p>
-              <p>(को हो यो?)</p>
-              <p>पुरानो म त कता हराएछ</p>
-              <p>नयाँ यो छालाले सबैलाई जितेछ</p>
-            </section>
-
-            <section>
-              <h4>[Pre-Chorus]</h4>
-              <p>सूर्यको किरण देखि डराउँछु म त</p>
-              <p>कालो छाता ओढेर मात्रै हिँड्छु म त</p>
-              <p>(सेतो!)</p>
-              <p>(एकदम सेतो!)</p>
-            </section>
-
-            <section>
-              <h4>[Chorus]</h4>
-              <p>म त गोरो, म कति राम्रो</p>
-              <p>सबैको आँखा अब मतिरै हुन्छ</p>
-              <p>कालो छालाको यहाँ कामै छैन</p>
-              <p>चम्किलो मेरो यो नयाँ अवतार</p>
-              <p>हेर मलाई, म त कति सफा!</p>
-              <p>(गो-गो-गोरो!)</p>
-            </section>
-
-            <section>
-              <h4>[Verse 2]</h4>
-              <p>पुरानो संस्कृति र भेष भुलेँ</p>
-              <p>विदेशी पाउडरमा म त झुम्मिएँ</p>
-              <p>छिमेकीले मलाई चिन्नै छाडे</p>
-              <p>नयाँ रुपको अर्कै रवाफ छ यहाँ</p>
-              <p>चिउँडो अलि माथि, आँखामा घमण्ड</p>
-              <p>बाटोमा हिँड्दा म नै ठालु जस्तो</p>
-            </section>
-
-            <section>
-              <h4>[Pre-Chorus]</h4>
-              <p>सूर्यको किरण देखि डराउँछु म त</p>
-              <p>कालो छाता ओढेर मात्रै हिँड्छु म त</p>
-              <p>(सेतो!)</p>
-              <p>(एकदम सेतो!)</p>
-            </section>
-
-            <section>
-              <h4>[Chorus]</h4>
-              <p>म त गोरो, म कति राम्रो</p>
-              <p>सबैको आँखा अब मतिरै हुन्छ</p>
-              <p>कालो छालाको यहाँ कामै छैन</p>
-              <p>चम्किलो मेरो यो नयाँ अवतार</p>
-              <p>हेर मलाई, म त कति सफा!</p>
-            </section>
-
-            <section>
-              <h4>[Bridge]</h4>
-              <p>[The music slows down, heavy bass pulses]</p>
-              <p>मन भित्र जस्तो भए नि के भो र?</p>
-              <p>बाहिर त टल्किएको हुनुपर्छ</p>
-              <p>सक्छौ भने मलाई चिनेर देखाऊ</p>
-              <p>यो नक्कली रंगमा म नै हराएँ</p>
-              <p>(हराएँ!)</p>
-              <p>(म हराएँ!)</p>
-              <p>सक्छौ भने अब छोएर देखाऊ</p>
-            </section>
-
-            <section>
-              <h4>[Chorus]</h4>
-              <p>म त गोरो, म कति राम्रो</p>
-              <p>सबैको आँखा अब मतिरै हुन्छ</p>
-              <p>कालो छालाको यहाँ कामै छैन</p>
-              <p>चम्किलो मेरो यो नयाँ अवतार</p>
-              <p>हेर मलाई, म त कति सफा!</p>
-              <p>(गो-गो-गोरो!)</p>
-            </section>
-
-            <section>
-              <h4>[Outro]</h4>
-              <p>[Madal and Sarangi reach a frantic peak]</p>
-              <p>पाउडर</p>
-            </section>
-          </div>
+          <div className="text-[#777A80]">{lyrics_output}</div>
         </div>
       </div>
     </div>

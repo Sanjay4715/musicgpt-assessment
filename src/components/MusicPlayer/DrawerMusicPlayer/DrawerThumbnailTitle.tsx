@@ -1,10 +1,18 @@
 import Image2 from "@/assets/Image2.webp";
+import ImageThumbnail from "@/components/ImageThumbnail/ImageThumbnail";
 import { Button } from "@/components/ui/button";
 import { DrawerHeader } from "@/components/ui/drawer";
+import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 import { EllipsisVertical, Logs } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 const DrawerThumbnailTitle = () => {
+  const { musicToPlay } = useMusicPlayerStore();
+  const [error, setError] = useState(false);
+
+  const { title, image_custom_thumbnail } = musicToPlay;
+
   return (
     <DrawerHeader
       data-id="drawer-music-thumbnail-title"
@@ -15,19 +23,22 @@ const DrawerThumbnailTitle = () => {
         <EllipsisVertical size={20} />
       </div>
       <div className="w-full flex items-start px-6 pb-6 gap-4">
-        <div>
-          <Image
-            src={Image2}
-            alt="generation"
-            width={96}
-            height={96}
-            className="rounded-[26px]"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="text-[16px] font-semibold">
-            The Satirical Echo of the world
-          </div>
+        <Image
+          src={
+            error || !image_custom_thumbnail
+              ? "/fallback.png"
+              : image_custom_thumbnail
+          }
+          alt="generation"
+          width={96}
+          height={96}
+          className="rounded-[26px]"
+          onError={() => {
+            setError(true);
+          }}
+        />
+        <div className="flex flex-col gap-2 text-start">
+          <div className="text-[16px] font-semibold">{title}</div>
           <div className="flex gap-2 font-medium text-[#FFFFFF80] text-[14px]">
             <span className="truncate">@username</span>
             <span>•</span>
