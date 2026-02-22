@@ -42,7 +42,7 @@ const MobileSidebar = ({ onClose }: MobileSidebarProps) => {
           <HomeMenu />
         </div>
 
-        <div className="px-4 py-5 pretty-scrollbar-4 flex-1 overflow-y-auto overscroll-contain border-t border-transparent">
+        <div className="px-4 py-5 pretty-scrollbar-4 flex-1 overflow-y-auto overscroll-contain border-t border-transparent custom-scrollbar">
           <LibraryMenu />
         </div>
 
