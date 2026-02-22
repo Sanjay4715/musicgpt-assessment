@@ -1,5 +1,4 @@
-import Image2 from "@/assets/Image2.webp";
-import ImageThumbnail from "@/components/ImageThumbnail/ImageThumbnail";
+import AppLogo from "@/assets/AppLogo.svg";
 import { Button } from "@/components/ui/button";
 import { DrawerHeader } from "@/components/ui/drawer";
 import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
@@ -25,9 +24,7 @@ const DrawerThumbnailTitle = () => {
       <div className="w-full flex items-start px-6 pb-6 gap-4">
         <Image
           src={
-            error || !image_custom_thumbnail
-              ? "/fallback.png"
-              : image_custom_thumbnail
+            error || !image_custom_thumbnail ? AppLogo : image_custom_thumbnail
           }
           alt="generation"
           width={96}

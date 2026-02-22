@@ -7,9 +7,26 @@ export const useMusicPlayerStore = createStore<MusicPlayerStore>(
     isPlayerOn: false,
     musicToPlay: { id: "" },
     currentTimestamp: 0,
-    toggleMusicPlayer: (value: boolean) => set({ isPlayerOn: value }),
-    addMusicToPlayer: (value: GeneratedList) => set({ musicToPlay: value }),
+    isMusicPaused: true,
+    toggleMusicPlayer: (value: boolean) => {
+      set({ isPlayerOn: value });
+      if (value === false) {
+        set({ currentTimestamp: 0 });
+        set({
+          musicToPlay: {
+            id: "",
+          },
+        });
+      }
+    },
+    addMusicToPlayer: (value: GeneratedList) => {
+      set({ musicToPlay: value });
+    },
     setCurrentTimestamp: (value: number) => set({ currentTimestamp: value }),
+    setMusicPlayPause: (value: boolean) =>
+      set({
+        isMusicPaused: value,
+      }),
   }),
-  { name: "MusicPlayerStore", persist: true, storageType: "session" },
+  { name: "MusicPlayerStore", persist: false, storageType: "session" },
 );

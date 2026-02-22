@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-import Image2 from "@/assets/Image2.webp";
+import AppLogo from "@/assets/AppLogo.svg";
 import { Edit2Icon } from "lucide-react";
 import { Input } from "../../ui/input";
 import { MusicThumbailAndTitleProps } from "@/interface/Music";
@@ -36,7 +36,7 @@ const MusicThumbnailAndTitle = ({
           <Image
             src={
               error || !image_custom_thumbnail
-                ? "/fallback.png"
+                ? AppLogo
                 : image_custom_thumbnail
             }
             alt="mobile-thumbnail"

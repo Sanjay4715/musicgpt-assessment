@@ -10,8 +10,14 @@ import DrawerMusicPlayer from "../DrawerMusicPlayer/DrawerMusicPlayer";
 import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 
 const MobileMusicPlayer = () => {
-  const { musicToPlay, currentTimestamp, setCurrentTimestamp } =
-    useMusicPlayerStore();
+  const {
+    musicToPlay,
+    currentTimestamp,
+    setCurrentTimestamp,
+    toggleMusicPlayer,
+    setMusicPlayPause,
+    isMusicPaused,
+  } = useMusicPlayerStore();
   const { audio_length_ms, file_output_0 } = musicToPlay;
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -26,6 +32,22 @@ const MobileMusicPlayer = () => {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    const controlPlayback = async () => {
+      try {
+        if (isMusicPaused) {
+          audio.pause();
+          setIsPlaying(false);
+        } else {
+          await audio.play();
+          setIsPlaying(true);
+        }
+      } catch (err) {
+        console.warn("Playback failed:", err);
+      }
+    };
+
+    controlPlayback();
 
     const onUpdate = () => {
       if (!isDragging) {
@@ -97,6 +119,7 @@ const MobileMusicPlayer = () => {
         await audioRef.current.play();
       }
       setIsPlaying(!isPlaying);
+      setMusicPlayPause(isPlaying);
     } catch (err) {
       console.error("Playback failed:", err);
     }
@@ -112,7 +135,10 @@ const MobileMusicPlayer = () => {
     >
       <div className="flex flex-col items-center bg-[#1d212599] backdrop-blur-[50px] rounded-lg w-full border border-[#ffffff1a] hover:bg-[#ffffff1a] cursor-pointer">
         <div className="absolute -top-3 right-[-2] z-80">
-          <Button className="w-[24px] h-[24px] rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer">
+          <Button
+            className="w-[24px] h-[24px] rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer"
+            onClick={() => toggleMusicPlayer(false)}
+          >
             <X />
           </Button>
         </div>

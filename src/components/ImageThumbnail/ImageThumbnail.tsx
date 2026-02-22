@@ -1,6 +1,7 @@
 "use client";
 
 import { ImageThumbnailProps } from "@/interface/ImageThumbnail";
+import AppLogo from "@/assets/AppLogo.svg";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
@@ -23,7 +24,7 @@ const ImageThumbnail = ({
       )}
 
       <Image
-        src={error || !src ? "/fallback.png" : src}
+        src={error || !src ? AppLogo : src}
         alt={alt}
         width={width}
         height={height}

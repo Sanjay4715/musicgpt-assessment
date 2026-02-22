@@ -2,6 +2,7 @@
 import Image from "next/image";
 import GenerationImage from "@/assets/Generation.png";
 import PlayIcon from "@/assets/PlayIcon.svg";
+import PauseIcon from "@/assets/PausedFilledIcon.svg";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { ArrowDownToLine, Ellipsis, ThumbsDown, ThumbsUp } from "lucide-react";
@@ -11,6 +12,7 @@ import { getVersion } from "@/common";
 import RippleBadge from "../Navigation/RippleBadge/RippleBadge";
 import { STATUS_TYPE } from "@/enums";
 import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
+import AudioLines from "../AudioLines/AudioLines";
 
 const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
   const {
@@ -22,8 +24,13 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
     status,
   } = generationItemProps;
   const [isMobile, setIsMobile] = useState(false);
-  const { isPlayerOn, toggleMusicPlayer, addMusicToPlayer } =
-    useMusicPlayerStore();
+  const {
+    toggleMusicPlayer,
+    addMusicToPlayer,
+    musicToPlay,
+    isMusicPaused,
+    setMusicPlayPause,
+  } = useMusicPlayerStore();
 
   useEffect(() => {
     const checkScreen = () => setIsMobile(window.innerWidth < 960);
@@ -33,13 +40,15 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
   }, []);
 
   const handleMusicPlayer = (item: GeneratedList) => {
-    addMusicToPlayer(generationItemProps);
+    addMusicToPlayer(item);
     toggleMusicPlayer(true);
   };
 
+  const isCurrentMusicPlaying = () => id === musicToPlay.id;
+
   return (
     <div
-      className="group flex flex-row gap-3 p-2 rounded-[12px] items-center cursor-pointer hover:bg-[#1d2125] hover:rounded-[24px] transition-all overflow-hidden"
+      className={`group flex flex-row gap-3 p-2 rounded-[12px] items-center cursor-pointer hover:bg-[#1d2125] hover:rounded-[24px] transition-all overflow-hidden ${isCurrentMusicPlaying() && "bg-[#1d2125]"}`}
       onClick={() => handleMusicPlayer(generationItemProps)}
     >
       <div className="shrink-0 w-14 h-14 rounded-[16px] flex items-center justify-center relative">
@@ -51,9 +60,35 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
           <RippleBadge isProfileBadge={false} />
         )}
         {/* Overlay on hover */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="bg-white/5 backdrop-blur-[20px] w-10 h-10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <Image alt="play" src={PlayIcon} width={20} height={20} />
+        <div className="absolute inset-0 flex items-center justify-center group">
+          {isCurrentMusicPlaying() && !isMusicPaused && (
+            <div className="flex items-center justify-center transition-opacity duration-200 group-hover:opacity-0 opacity-100">
+              <AudioLines />
+            </div>
+          )}
+          <div className="absolute flex items-center justify-center bg-white/5 backdrop-blur-[20px] w-10 h-10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            {isCurrentMusicPlaying() ? (
+              isMusicPaused ? (
+                <Image
+                  alt="play"
+                  src={PlayIcon}
+                  width={20}
+                  height={20}
+                  onClick={() => setMusicPlayPause(false)}
+                />
+              ) : (
+                <Image
+                  alt="Pause"
+                  src={PauseIcon}
+                  width={20}
+                  height={20}
+                  onClick={() => setMusicPlayPause(true)}
+                />
+              )
+            ) : (
+              <Image alt="play" src={PlayIcon} width={20} height={20} 
+                  onClick={() => setMusicPlayPause(false)}/>
+            )}
           </div>
         </div>
       </div>
