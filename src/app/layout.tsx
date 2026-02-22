@@ -18,7 +18,7 @@ export default function RootLayout({
   const { isPlayerOn } = useMusicPlayerStore();
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-full bg-[#0A0C0D]`}>
+      <body className={`${inter.className} min-h-full bg-[#0A0C0D] custom-scrollbar`}>
         <section className="flex w-full">
           <DesktopSidebar />
           <main className="relative z-0 ml-0 min-[960px]:ml-(--sidebar-width) flex-1 w-full pt-10 overflow-x-hidden">
