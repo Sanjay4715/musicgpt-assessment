@@ -110,8 +110,6 @@ pnpm install</code></pre>
 
   <h2>📸 Screenshots</h2>
 
-  <p>Add screenshots inside <code>/public</code> and reference them here:</p>
-
   <pre><code>
     &lt;img src="./public/CreatePageDesktop.png" alt="CreatePageDesktop" width="100%" /&gt;
     &lt;img src="./public/MusicPlayerDesktop.png" alt="MusicPlayerDesktop" width="100%" /&gt;
