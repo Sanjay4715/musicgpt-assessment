@@ -1,6 +1,8 @@
 export interface MusicControlsProps {
   fromMobilePlayer?: boolean;
   isPlaying: boolean;
+  currentTime: number;
+  duration: number;
   onPlayPause: () => void;
 }
 
