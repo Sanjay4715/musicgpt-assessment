@@ -1,11 +1,18 @@
 "use client";
 
 import { ImageThumbnailProps } from "@/interface/ImageThumbnail";
+import AppLogo from "@/assets/AppLogo.svg";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 
-const ImageThumbnail = ({ src, alt, className }: ImageThumbnailProps) => {
+const ImageThumbnail = ({
+  src,
+  alt,
+  className,
+  width,
+  height,
+}: ImageThumbnailProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -17,8 +24,10 @@ const ImageThumbnail = ({ src, alt, className }: ImageThumbnailProps) => {
       )}
 
       <Image
-        src={error || !src ? "/fallback.png" : src}
+        src={error || !src ? AppLogo : src}
         alt={alt}
+        width={width}
+        height={height}
         fill
         className={cn("object-cover rounded-[16px]", className)}
         onLoad={() => setLoading(false)}

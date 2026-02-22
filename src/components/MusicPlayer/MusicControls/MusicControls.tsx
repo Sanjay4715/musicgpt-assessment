@@ -26,7 +26,7 @@ const MusicControls = ({
       )}
       <SkipBack
         size={20}
-        className="text-[#ffffff80] hover:text-white cursor-pointer"
+        className="text-[#ffffff80] hover:text-white cursor-pointer max-[342px]:hidden"
       />
       <div
         className={`flex items-center rounded-full
@@ -54,7 +54,7 @@ const MusicControls = ({
       </div>
       <SkipForward
         size={20}
-        className="text-[#ffffff80] hover:text-white cursor-pointer"
+        className="text-[#ffffff80] hover:text-white cursor-pointer max-[342px]:hidden"
       />
       {!fromMobilePlayer && (
         <Repeat

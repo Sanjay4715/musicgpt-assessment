@@ -1,14 +1,18 @@
+"use client";
+
 import { ReactNode } from "react";
 import Header from "./Header/Header";
 import DesktopSidebar from "./Sidebar/DesktopSidebar";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import { Toaster } from "sonner";
+import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 
 interface NavLinkProps {
   children: ReactNode;
 }
 
 const Navigation: React.FC<NavLinkProps> = ({ children }) => {
+  const { isPlayerOn } = useMusicPlayerStore();
   return (
     <section className="flex w-full">
       <DesktopSidebar />
@@ -17,7 +21,7 @@ const Navigation: React.FC<NavLinkProps> = ({ children }) => {
         {children}
         <Toaster richColors position="top-center" />
       </main>
-      <MusicPlayer />
+      {isPlayerOn && <MusicPlayer />}
     </section>
   );
 };
