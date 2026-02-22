@@ -8,6 +8,7 @@ import { useGeneratedListStore } from "@/store/useGeneratedListStore";
 import GeneratedListItem from "@/components/GeneratedListItem/GeneratedListItem";
 import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
 import { sortArrayByCreatedAt } from "@/common";
+import SkeletonGeneratedItems from "@/components/SkeletonGeneratedItems/SkeletonGeneratedItems";
 
 const Create = () => {
   const { getPrompts } = usePresetPromptStore();
@@ -34,6 +35,7 @@ const Create = () => {
           {sortedGeneratedList.map((generatedItem) => (
             <GeneratedListItem key={generatedItem.id} {...generatedItem} />
           ))}
+          <SkeletonGeneratedItems />
         </div>
       </div>
     </div>

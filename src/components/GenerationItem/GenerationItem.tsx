@@ -9,7 +9,7 @@ import { ArrowDownToLine, Ellipsis, ThumbsDown, ThumbsUp } from "lucide-react";
 import { GeneratedList } from "@/interface/GeneratedItems";
 import ImageThumbnail from "../ImageThumbnail/ImageThumbnail";
 import { getVersion } from "@/common";
-import RippleBadge from "../Navigation/RippleBadge/RippleBadge";
+import RippleBadge from "../RippleBadge/RippleBadge";
 import { STATUS_TYPE } from "@/enums";
 import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 import AudioLines from "../AudioLines/AudioLines";

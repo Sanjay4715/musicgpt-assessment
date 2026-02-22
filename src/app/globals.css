@@ -227,39 +227,81 @@ body {
 
 .animate-border {
   position: relative;
-  /* Gradient background */
-  background: linear-gradient(270deg, #FF7B16, #8800ff, #FF7B16);
-  background-size: 600% 600%;
-
-  /* Glow / box-shadow initial */
-  box-shadow: 0 0 30px #FF7B16;
-  /* Animate both gradient and shadow */
-  animation: gradientWave 8s linear infinite, shadowWave 8s linear infinite;
+  background: #1a1b1e;
+  z-index: 1;
+  /* Keeps input content above the glow */
+  overflow: hidden;
+  /* Clips the glow so it only shows at the edges */
 }
 
-/* Gradient movement */
-@keyframes gradientWave {
-  0% {
-    background-position: 0% 25%;
+/* 1. THE OUTER ROTATING SHADOW (The "Glow") */
+.animate-border::before {
+  content: "";
+  position: absolute;
+  /* Spread it slightly wider than the box */
+  inset: -15px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg,
+      transparent 0%,
+      #FF7B16 25%,
+      #FF55AA 50%,
+      #FF7B16 75%,
+      transparent 100%);
+  /* Use high blur instead of box-shadow for performance */
+  filter: blur(30px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: rotateGlow 6s linear infinite;
+}
+
+/* The actual moving glow element */
+.animate-border::after {
+  content: "";
+  position: absolute;
+  /* Make the glow much wider than the box to create the "trail" */
+  width: 140%;
+  height: 250%;
+  top: -75%;
+  left: -20%;
+
+  /* Create the color transition: Transparent -> Orange -> Purple -> Orange -> Transparent */
+  background: conic-gradient(from 0deg,
+      transparent 0%,
+      #FF7B16 25%,
+      #FF55AA 50%,
+      #FF55AA 65%,
+      #FF7B16 75%,
+      #FF7B16 100%);
+
+  /* This shadow now rotates with the element */
+  box-shadow: 0 0 35px 5px #FF7B16;
+  /* The "Glow" effect */
+  filter: blur(20px);
+  opacity: 0.8;
+  z-index: -1;
+
+  /* The rotation creates the "traveling" effect around the border */
+  animation: rotateGlow 6s linear infinite, shadowWave 5s linear infinite;
+}
+
+@keyframes rotateGlow {
+  from {
+    transform: rotate(0deg);
   }
 
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
+  to {
+    transform: rotate(360deg);
   }
 }
 
 /* Moving box-shadow */
 @keyframes shadowWave {
   0% {
-    box-shadow: -10px 0 20px #FF7B16;
+    box-shadow: 20px 0 20px #FF7B16;
   }
 
   25% {
-    box-shadow: 10px 0 5px #FF7B16;
+    box-shadow: 20px 0 20px #FF7B16;
   }
 
   50% {
@@ -271,7 +313,7 @@ body {
   }
 
   100% {
-    box-shadow: 20px 0 20px #FF7B16;
+    box-shadow: 20px 0 2px #FF7B16;
   }
 }
 

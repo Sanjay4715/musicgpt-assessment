@@ -6,7 +6,6 @@ import { useState } from "react";
 import Profile from "../Profile/Profile";
 import MobileSidebar from "../Sidebar/MobileSidebar";
 import { AnimatePresence } from "framer-motion";
-import MobileProfileDropdown from "../ProfileDropdown/MobileProfileDropdown";
 import {
   Sheet,
   SheetContent,
@@ -14,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import MobileProfileDropdown from "../ProfileDropdown/MobileProfileDropdown";
 
 const MobileHeader = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
@@ -25,7 +25,10 @@ const MobileHeader = () => {
       <AnimatePresence>
         {openDrawer && <MobileSidebar onClose={() => setOpenDrawer(false)} />}
       </AnimatePresence>
-      <header data-id="mobile-header" className="min-[960px]:hidden fixed top-0 flex items-center justify-between z-110 responsive-side-padding h-20 w-full p-5">
+      <header
+        data-id="mobile-header"
+        className="min-[960px]:hidden fixed top-0 flex items-center justify-between z-110 responsive-side-padding h-20 w-full p-5"
+      >
         <div className="flex flex-row gap-3 items-center">
           <div
             onClick={() => setOpenDrawer(!openDrawer)}

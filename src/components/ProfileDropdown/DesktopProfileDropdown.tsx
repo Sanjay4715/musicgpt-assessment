@@ -1,15 +1,15 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
-import ProfileInfo from "../../GenerationItem/ProfileInfo/ProfileInfo";
-import CreditInfo from "../../GenerationItem/CreditInfo/CreditInfo";
-import TopupInfo from "../../GenerationItem/TopupInfo/TopupInfo";
 import ProcessingGenerationItem from "@/components/GenerationItem/ProcessingGenerationItem";
 import GeneratedListItem from "@/components/GeneratedListItem/GeneratedListItem";
 import { useGeneratedListStore } from "@/store/useGeneratedListStore";
 import { useEffect } from "react";
 import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
 import { sortArrayByCreatedAt } from "@/common";
+import ProfileInfo from "../GenerationItem/ProfileInfo/ProfileInfo";
+import CreditInfo from "../GenerationItem/CreditInfo/CreditInfo";
+import TopupInfo from "../GenerationItem/TopupInfo/TopupInfo";
 
 const DesktopProfileDropdown = () => {
   const { sortedGeneratedList, getGeneratedAudios } = useGeneratedListStore();

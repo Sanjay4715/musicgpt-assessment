@@ -1,5 +1,5 @@
 import { Settings } from "lucide-react";
-import Profile from "../../Navigation/Profile/Profile";
+import Profile from "../../Profile/Profile";
 
 const ProfileInfo = () => {
   return (
