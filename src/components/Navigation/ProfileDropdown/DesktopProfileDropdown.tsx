@@ -8,9 +8,12 @@ import ProcessingGenerationItem from "@/components/GenerationItem/ProcessingGene
 import GeneratedListItem from "@/components/GeneratedListItem/GeneratedListItem";
 import { useGeneratedListStore } from "@/store/useGeneratedListStore";
 import { useEffect } from "react";
+import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
+import { sortArrayByCreatedAt } from "@/common";
 
 const DesktopProfileDropdown = () => {
   const { sortedGeneratedList, getGeneratedAudios } = useGeneratedListStore();
+  const { latestStatusData } = useLiveGenerationStore();
 
   useEffect(() => {
     getGeneratedAudios();
@@ -28,11 +31,13 @@ const DesktopProfileDropdown = () => {
         <div className="flex flex-col gap-1.5">
           <TopupInfo />
 
+          {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
+            <ProcessingGenerationItem key={data.id} {...data} />
+          ))}
+
           {sortedGeneratedList.map((generatedItem) => (
             <GeneratedListItem key={generatedItem.id} {...generatedItem} />
           ))}
-
-          <ProcessingGenerationItem />
         </div>
       </div>
     </div>

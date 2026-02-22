@@ -1,10 +1,11 @@
 "use client";
 
-import { ProcessProps } from "@/interface/GenerationInterface";
 import { Button } from "../ui/button";
 import { labelProcessing } from "@/constants/constants";
+import { GeneratedList } from "@/interface/GeneratedItems";
+import { getVersion } from "@/common";
 
-const Process = ({ title, version, progress }: ProcessProps) => {
+const Process = ({ title, version_string, progress }: GeneratedList) => {
   const getLabel = (progress: number) => {
     const findLabel = labelProcessing.find(
       (e) => e.start <= progress && e.end >= progress,
@@ -30,19 +31,23 @@ const Process = ({ title, version, progress }: ProcessProps) => {
       </div>
 
       {/* Title */}
-      <div className="relative z-10 flex flex-col gap-1 flex-1 min-w-0">
-        <span className="text-[#E4E6E8] truncate text-sm">{title}</span>
-        <span className="text-[#898C92] truncate text-sm">
-          {getLabel(progress)}
-        </span>
-      </div>
+      {progress && (
+        <div className="relative z-10 flex flex-col gap-1 flex-1 min-w-0">
+          <span className="text-[#E4E6E8] truncate text-sm">{title}</span>
+          <span className="text-[#898C92] truncate text-sm">
+            {getLabel(progress)}
+          </span>
+        </div>
+      )}
 
-      {/* Version */}
-      <div className="relative z-10 shrink-0">
-        <Button className="w-8 h-6 rounded-[8px] border border-[#5D6165] bg-transparent hover:bg-transparent">
-          {version}
-        </Button>
-      </div>
+      {/* version_string */}
+      {version_string && (
+        <div className="relative z-10 shrink-0">
+          <Button className="w-8 h-6 rounded-[8px] border border-[#5D6165] bg-transparent hover:bg-transparent">
+            {getVersion(version_string)}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

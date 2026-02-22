@@ -1,0 +1,50 @@
+
+> musicgpt-assessment@0.1.0 dev
+> concurrently -n next,server -c blue,green "npm run dev:next" "npm run dev:server"
+
+[next] 
+[next] > musicgpt-assessment@0.1.0 dev:next
+[next] > next dev
+[next] 
+[server] 
+[server] > musicgpt-assessment@0.1.0 dev:server
+[server] > node --loader ts-node/esm server.ts
+[server] 
+[server] (node:18964) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+[server] --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
+[server] (Use `node --trace-warnings ...` to show where the warning was created)
+[server] (node:18964) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+[server] (Use `node --trace-deprecation ...` to show where the warning was created)
+[next] ▲ Next.js 16.1.6 (Turbopack)
+[next] - Local:         http://localhost:3000
+[next] - Network:       http://192.168.1.71:3000
+[next] - Environments: .env
+[next] 
+[next] ✓ Starting...
+[server] node:events:496
+[server]       throw er; // Unhandled 'error' event
+[server]       ^
+[server] 
+[server] Error: listen EADDRINUSE: address already in use :::4000
+[server]     at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+[server]     at listenInCluster (node:net:1994:12)
+[server]     at Server.listen (node:net:2099:7)
+[server]     at file:///E:/Personal/musicgpt-assessment/server.ts:115:8
+[server]     at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+[server]     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+[server]     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+[server] Emitted 'error' event on Server instance at:
+[server]     at emitErrorNT (node:net:1973:8)
+[server]     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+[server]   code: 'EADDRINUSE',
+[server]   errno: -4091,
+[server]   syscall: 'listen',
+[server]   address: '::',
+[server]   port: 4000
+[server] }
+[server] 
+[server] Node.js v22.14.0
+[server] npm run dev:server exited with code 1
+Terminate batch job (Y/N)? [next] Terminate batch job (Y/N)? [?25h
+[next] npm run dev:next exited with code 1
+

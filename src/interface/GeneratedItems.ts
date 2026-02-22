@@ -1,6 +1,6 @@
 export interface GeneratedList {
   id: string;
-  created_at: string;
+  created_at?: string;
   user_id?: string;
   title?: string;
   image_custom?: string;
@@ -12,6 +12,7 @@ export interface GeneratedList {
   error_message_detail?: string;
   status?: string;
   error_tag?: string;
+  progress?: number;
 }
 
 export type GeneratedListItemProps = GeneratedList;
@@ -21,4 +22,8 @@ export interface GeneratedListStore {
   unprocessed: GeneratedList[];
   sortedGeneratedList: GeneratedList[];
   getGeneratedAudios(): Promise<void>; // <-- rename here (was getPropmts)
+}
+
+export interface GenerationItemProcessingProps {
+  items: GeneratedList;
 }

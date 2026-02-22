@@ -3,9 +3,3 @@ export interface LabelProcessing {
   end: number;
   label: string;
 }
-
-export interface ProcessProps {
-  title: string;
-  version: string;
-  progress: number;
-}
