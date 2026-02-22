@@ -2,8 +2,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { musicPlayerTabOptions } from "@/constants/constants";
 import LyricsContent from "./MusicContent/LyricsContent";
 import CommentContent from "./MusicContent/CommentContent";
+import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
 
 const DrawerMusicContent = () => {
+  const { musicToPlay } = useMusicPlayerStore();
+
+  const { input_prompt, lyrics_output } = musicToPlay;
+
   return (
     <div data-id="drawer-music-content" className="px-4 pb-5">
       <div className="w-full mb-5 px-3">
@@ -24,7 +29,10 @@ const DrawerMusicContent = () => {
             value="lyrics"
             className="mt-4 flex-1 overflow-y-auto custom-scrollbar max-h-[260px]"
           >
-            <LyricsContent />
+            <LyricsContent
+              lyrics={lyrics_output ?? ""}
+              prompt={input_prompt ?? ""}
+            />
           </TabsContent>
           <TabsContent
             value="comments"

@@ -13,6 +13,9 @@ export interface GeneratedList {
   status?: string;
   error_tag?: string;
   progress?: number;
+  file_output_0?: string;
+  lyrics_output?: string;
+  audio_length_ms?: number;
 }
 
 export type GeneratedListItemProps = GeneratedList;

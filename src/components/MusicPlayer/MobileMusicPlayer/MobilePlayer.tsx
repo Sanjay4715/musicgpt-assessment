@@ -18,7 +18,9 @@ const MobilePlayer = ({
       <div className="flex w-full items-center justify-start gap-8">
         <MusicThumbnailAndTitle isMobilePlayer={true} />
         <div className="flex gap-3 shrink-0 items-center justify-center">
-          <MusicTimer currentTime={currentTime} duration={duration} />
+          <div className="max-[420px]:hidden">
+            <MusicTimer currentTime={currentTime} duration={duration} />
+          </div>
           <MusicControls
             fromMobilePlayer
             isPlaying={isPlaying}
