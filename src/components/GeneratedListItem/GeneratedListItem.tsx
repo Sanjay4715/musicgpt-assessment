@@ -5,7 +5,6 @@ import GenerationItem from "../GenerationItem/GenerationItem";
 
 const GeneratedListItem = ({ ...generatedItemProps }: GeneratedList) => {
   const { status, error_tag } = generatedItemProps;
-  console.log("ayop?");
   switch (status) {
     case "FAILED":
       if (error_tag === "BAD_REQUEST") {
