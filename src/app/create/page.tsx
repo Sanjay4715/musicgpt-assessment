@@ -23,7 +23,7 @@ const Create = () => {
   return (
     <div className="w-full min-h-[90vh] px-4 md:px-6 lg:px-8 flex flex-col justify-center">
       <PromptSection submitPrompt={submitPrompt} />
-      <div className="container mx-auto flex flex-col gap-5 justify-center">
+      <div className="relative mx-auto w-[calc(100%-28px)] min-[960px]:w-[calc(100%-20px)] min-[960px]:max-w-185">
         <h2 className="text-[18px] font-semibold text-[#E4E6E8]">
           Recent generations
         </h2>
