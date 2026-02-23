@@ -39,3 +39,6 @@ export const formattedLyrics = (rawLyrics: string) =>
     .replace(/([a-z])([A-Z])/g, "$1\n$2")
     .replace(/\n+/g, "\n")
     .trim();
+
+export const delay = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));

@@ -9,10 +9,12 @@ import GeneratedListItem from "@/components/GeneratedListItem/GeneratedListItem"
 import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
 import { sortArrayByCreatedAt } from "@/common";
 import SkeletonGeneratedItems from "@/components/SkeletonGeneratedItems/SkeletonGeneratedItems";
+import { API_STATUS } from "@/enums";
 
 const Create = () => {
   const { getPrompts } = usePresetPromptStore();
-  const { sortedGeneratedList, getGeneratedAudios } = useGeneratedListStore();
+  const { sortedGeneratedList, getGeneratedAudios, apiStatus } =
+    useGeneratedListStore();
   const { latestStatusData, submitPrompt } = useLiveGenerationStore();
 
   useEffect(() => {
@@ -27,16 +29,19 @@ const Create = () => {
         <h2 className="text-[18px] font-semibold text-[#E4E6E8]">
           Recent generations
         </h2>
-        <div className="flex flex-col gap-1">
-          <TopupInfo />
-          {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
-            <ProcessingGenerationItem key={data.id} {...data} />
-          ))}
-          {sortedGeneratedList.map((generatedItem) => (
-            <GeneratedListItem key={generatedItem.id} {...generatedItem} />
-          ))}
+        {apiStatus === API_STATUS.SUCCESS ? (
+          <div className="flex flex-col gap-1">
+            <TopupInfo />
+            {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
+              <ProcessingGenerationItem key={data.id} {...data} />
+            ))}
+            {sortedGeneratedList.map((generatedItem) => (
+              <GeneratedListItem key={generatedItem.id} {...generatedItem} />
+            ))}
+          </div>
+        ) : (
           <SkeletonGeneratedItems />
-        </div>
+        )}
       </div>
     </div>
   );

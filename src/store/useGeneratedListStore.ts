@@ -2,6 +2,7 @@ import { GeneratedList, GeneratedListStore } from "@/interface/GeneratedItems";
 import { createStore } from "./createStore";
 import api from "@/lib/api";
 import { sortArrayByCreatedAt } from "@/common";
+import { API_STATUS } from "@/enums";
 
 const getGeneratedAudios =
   (set: (fn: (state: GeneratedListStore) => GeneratedListStore) => void) =>
@@ -12,6 +13,8 @@ const getGeneratedAudios =
         api.get("/api/audio"),
         api.get("/api/unprocessed"),
       ]);
+
+      set((state) => ({ ...state, apiStatus: API_STATUS.FETCHING }));
       const [audioResult, unprocessedResult] = results;
       const generatedList: Array<GeneratedList> = [];
       // Handle audio response
@@ -39,17 +42,20 @@ const getGeneratedAudios =
       }
 
       const sortedGeneratedList = sortArrayByCreatedAt(generatedList);
+      set((state) => ({ ...state, apiStatus: API_STATUS.SUCCESS }));
       set((state) => ({
         ...state,
         sortedGeneratedList,
       }));
     } catch (error) {
+      set((state) => ({ ...state, apiStatus: API_STATUS.FAIL }));
       console.error(error);
     }
   };
 
 export const useGeneratedListStore = createStore<GeneratedListStore>(
   (set) => ({
+    apiStatus: API_STATUS.PENDING,
     audios: [],
     unprocessed: [],
     sortedGeneratedList: [],

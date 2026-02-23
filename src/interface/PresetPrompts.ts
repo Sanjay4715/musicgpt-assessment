@@ -1,3 +1,5 @@
+import { APIStatus } from "./GeneratedItems";
+
 export interface PromptState {
   id: string;
   status: string;
@@ -14,6 +16,7 @@ export interface CategorizedPrompt {
 }
 
 export interface PromptStore {
+  apiStatus: APIStatus;
   prompts: PromptState[];
   getPrompts(): Promise<void>;
 }

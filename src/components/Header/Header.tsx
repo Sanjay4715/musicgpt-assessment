@@ -15,7 +15,7 @@ import Profile from "../Profile/Profile";
 import { useCommonStore } from "@/store/useCommonStore";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import ProfileDropdown from "./ProfileDropdown/ProfileDropdown";
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
