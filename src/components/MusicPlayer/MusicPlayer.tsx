@@ -109,9 +109,13 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
+      e.preventDefault();
       if (isDragging) seek(e.clientX);
     };
-    const onMouseUp = () => setIsDragging(false);
+    const onMouseUp = (e: MouseEvent) => {
+      e.preventDefault();
+      setIsDragging(false);
+    };
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
@@ -147,6 +151,7 @@ const MusicPlayer = () => {
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsDragging(true);
     seek(e.clientX);
   };
@@ -188,84 +193,85 @@ const MusicPlayer = () => {
           </div>
         )}
 
-        <Drawer>
-          <DrawerTrigger asChild>
-            <div
-              className={`w-full ${
-                isMobile
-                  ? `flex shrink-0 items-center justify-between gap-4 px-2 py-1`
-                  : `relative rounded-[24px] transition-all duration-500 ease-in-out bg-white/5 backdrop-blur-xl border border-white/10 pointer-events-auto shadow-2xl ${isExpanded ? "h-103" : "h-22"}`
-              }`}
-              onMouseEnter={() => (!isMobile ? setIsHovered(true) : () => {})}
-              onMouseLeave={() => (!isMobile ? setIsHovered(false) : () => {})}
-            >
-              {/* Timeline */}
-              <MusicTimeline
-                timelineRef={timelineRef}
-                isDragging={isDragging}
-                handleMouseDown={handleMouseDown}
-                percent={percent}
-                progress={progress}
-                currentTime={currentTime}
-                duration={duration ?? 0}
-              />
+        <div
+          className={`w-full ${
+            isMobile
+              ? `flex shrink-0 items-center justify-between gap-4 px-2 py-1`
+              : `relative rounded-[24px] transition-all duration-500 ease-in-out bg-white/5 backdrop-blur-xl border border-white/10 pointer-events-auto shadow-2xl ${isExpanded ? "h-103" : "h-22"}`
+          }`}
+          onMouseEnter={() => (!isMobile ? setIsHovered(true) : () => {})}
+          onMouseLeave={() => (!isMobile ? setIsHovered(false) : () => {})}
+        >
+          {/* Timeline */}
+          <MusicTimeline
+            isMobile={isMobile}
+            timelineRef={timelineRef}
+            isDragging={isDragging}
+            handleMouseDown={handleMouseDown}
+            percent={percent}
+            progress={progress}
+            currentTime={currentTime}
+            duration={duration ?? 0}
+          />
 
-              {isMobile && (
-                <div
-                  data-id="mobile-close-player-icon"
-                  className="absolute -top-3 right-[-2] z-80"
-                >
-                  <Button
-                    className="w-[24px] h-[24px] rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer"
-                    onClick={() => toggleMusicPlayer(false)}
-                  >
-                    <X />
-                  </Button>
-                </div>
-              )}
-
-              {!isMobile && isHovered && !isDragging && (
-                <MusicPlayerOptions
-                  isExpanded={isExpanded}
-                  handleExpanded={setIsExpanded}
-                  volume={volume}
-                  handleVolume={handleVolumeChange}
-                />
-              )}
-
-              <div
-                className={`flex w-full items-center ${
-                  isMobile
-                    ? `justify-start gap-8`
-                    : `h-20 shrink-0 justify-between gap-4 pt-2 px-1`
-                }`}
-              >
-                <MusicThumbnailAndTitle isMobilePlayer={isMobile} />
-                <div
-                  className={`flex items-center ${
-                    isMobile
-                      ? `gap-3 shrink-0 justify-center`
-                      : `gap-8 justify-start`
-                  }`}
-                >
-                  <MusicControls
-                    fromMobilePlayer={isMobile}
-                    currentTime={currentTime}
-                    duration={duration}
-                    isPlaying={isPlaying}
-                    onPlayPause={togglePlay}
-                  />
-                </div>
-                {!isMobile && (
-                  <div className="ml-auto pr-5">
-                    <MusicFavoriteAndShare />
-                  </div>
-                )}
-              </div>
-              {isExpanded && !isMobile && <ExpandedArea />}
-            </div>
-          </DrawerTrigger>
           {isMobile && (
+            <div
+              data-id="mobile-close-player-icon"
+              className="absolute -top-3 right-[-2] z-80"
+            >
+              <Button
+                className="w-[24px] h-[24px] rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer"
+                onClick={() => toggleMusicPlayer(false)}
+              >
+                <X />
+              </Button>
+            </div>
+          )}
+
+          {!isMobile && isHovered && !isDragging && (
+            <MusicPlayerOptions
+              isExpanded={isExpanded}
+              handleExpanded={setIsExpanded}
+              volume={volume}
+              handleVolume={handleVolumeChange}
+            />
+          )}
+
+          <div
+            className={`flex w-full items-center ${
+              isMobile
+                ? `justify-start gap-8`
+                : `h-20 shrink-0 justify-between gap-4 pt-2 px-1`
+            }`}
+          >
+            <MusicThumbnailAndTitle isMobilePlayer={isMobile} />
+            <div
+              className={`flex items-center ${
+                isMobile
+                  ? `gap-3 shrink-0 justify-center`
+                  : `gap-8 justify-start`
+              }`}
+            >
+              <MusicControls
+                fromMobilePlayer={isMobile}
+                currentTime={currentTime}
+                duration={duration}
+                isPlaying={isPlaying}
+                onPlayPause={togglePlay}
+                drawerOpen={drawerOpen}
+                toggleDrawer={setDrawerOpen}
+              />
+            </div>
+            {!isMobile && (
+              <div className="ml-auto pr-5">
+                <MusicFavoriteAndShare />
+              </div>
+            )}
+          </div>
+          {isExpanded && !isMobile && <ExpandedArea />}
+        </div>
+        {isMobile && (
+          <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
             <DrawerMusicPlayer
               currentTime={currentTime}
               duration={duration ?? 0}
@@ -277,8 +283,8 @@ const MusicPlayer = () => {
               progress={progress}
               isPlaying={isPlaying}
             />
-          )}
-        </Drawer>
+          </Drawer>
+        )}
       </div>
     </div>
   );

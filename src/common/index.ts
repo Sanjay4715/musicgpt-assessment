@@ -32,3 +32,10 @@ export const sortArrayByCreatedAt = <
     return timeB - timeA; // newest first
   });
 };
+
+export const formattedLyrics = (rawLyrics: string) =>
+  rawLyrics
+    .replace(/\[(.*?)\]/g, "\n[$1]\n")
+    .replace(/([a-z])([A-Z])/g, "$1\n$2")
+    .replace(/\n+/g, "\n")
+    .trim();

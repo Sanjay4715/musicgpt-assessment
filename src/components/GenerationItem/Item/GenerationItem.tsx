@@ -3,16 +3,16 @@ import Image from "next/image";
 import GenerationImage from "@/assets/Generation.png";
 import PlayIcon from "@/assets/PlayIcon.svg";
 import PauseIcon from "@/assets/PausedFilledIcon.svg";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { useEffect, useState } from "react";
 import { ArrowDownToLine, Ellipsis, ThumbsDown, ThumbsUp } from "lucide-react";
 import { GeneratedList } from "@/interface/GeneratedItems";
-import ImageThumbnail from "../ImageThumbnail/ImageThumbnail";
+import ImageThumbnail from "../../ImageThumbnail/ImageThumbnail";
 import { getVersion } from "@/common";
-import RippleBadge from "../RippleBadge/RippleBadge";
+import RippleBadge from "../../RippleBadge/RippleBadge";
 import { STATUS_TYPE } from "@/enums";
 import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
-import AudioLines from "../AudioLines/AudioLines";
+import AudioLines from "../../AudioLines/AudioLines";
 
 const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
   const {

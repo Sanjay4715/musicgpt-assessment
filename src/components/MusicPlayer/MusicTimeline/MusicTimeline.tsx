@@ -1,6 +1,7 @@
 import { MusicTimelineProps } from "@/interface/Music";
 
 const MusicTimeline = ({
+  isMobile = false,
   isDrawer = false,
   handleMouseDown,
   isDragging,
@@ -20,14 +21,23 @@ const MusicTimeline = ({
   return (
     <div
       data-id="music-timeline"
-      className={`absolute z-10 ${!isDrawer ? "left-0 top-0 w-[700px] max-[960px]:w-[760px] xl:w-[862px]" : "w-[calc(100%-10px)]"}`}
+      className={`absolute z-10 ${
+        !isDrawer ? "left-0 right-9 top-0 z-50" : "left-0 right-0"
+      }`}
     >
       <button
         ref={timelineRef}
         type="button"
         aria-label="Audio Player Timeline"
-        onMouseDown={handleMouseDown}
-        className={`group absolute w-full right-0 cursor-pointer ${isDrawer ? "left-0 h-1" : "left-5 top-[-7.5px] h-4"}`}
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          handleMouseDown(e);
+        }}
+        className={`group absolute cursor-pointer w-full ${
+          isDrawer
+            ? "left-0 right-0 h-1"
+            : `${isMobile ? "left-2.5" : "left-4.5"} top-[-7.5px] h-4 right-2.5"`
+        }`}
       >
         {isDrawer && (
           <span className="absolute inset-0 rounded-full bg-white/10 z-0" />

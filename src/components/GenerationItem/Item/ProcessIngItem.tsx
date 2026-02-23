@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { labelProcessing } from "@/constants/constants";
 import { GeneratedList } from "@/interface/GeneratedItems";
 import { getVersion } from "@/common";
 
-const Process = ({ title, version_string, progress }: GeneratedList) => {
+const ProcessingItem = ({ title, version_string, progress }: GeneratedList) => {
   const getLabel = (progress: number) => {
     const findLabel = labelProcessing.find(
       (e) => e.start <= progress && e.end >= progress,
@@ -52,4 +52,4 @@ const Process = ({ title, version_string, progress }: GeneratedList) => {
   );
 };
 
-export default Process;
+export default ProcessingItem;
