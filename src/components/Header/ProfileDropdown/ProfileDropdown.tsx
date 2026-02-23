@@ -26,7 +26,9 @@ const ProfileDropdown = ({ isMobile, onClose }: ProfileDropdownProps) => {
       data-id={
         isMobile ? "mobile-profile-dropdown" : "desktop-profile-dropdown"
       }
-      className={`${isMobile ? "flex flex-col p-5 h-screen gap-[20px] overflow-auto custom-scrollbar profile-popover-scrollbar" : "w-105 max-[960px]:w-screen rounded-[20px] border border-[#1D2125] bg-[#16191C] overflow-hidden max-[960px]:w-screen h-[55vh] max-h-150 max-[960px]:h-screen overflow-auto flex flex-col gap-5 py-5 px-4 text-[#777A80] custom-scrollbar profile-popover-scrollbar"}`}
+      className={`${isMobile ? 
+        "flex flex-col p-5 h-screen gap-[20px] overflow-auto custom-scrollbar profile-popover-scrollbar" 
+        : "w-105 max-[960px]:w-screen rounded-[20px] border border-[#1D2125] bg-[#16191C] max-[960px]:w-screen h-[55vh] max-h-150 max-[960px]:h-screen overflow-auto flex flex-col gap-5 py-5 px-4 text-[#777A80] custom-scrollbar profile-popover-scrollbar"}`}
     >
       {isMobile && (
         <div
