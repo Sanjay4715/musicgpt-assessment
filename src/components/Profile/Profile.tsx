@@ -25,7 +25,7 @@ const Profile = ({
           J
         </div>
       </div>
-      {badge && latestStatusData && (
+      {badge && latestStatusData.length > 0 && (
         <RippleBadge label={latestStatusData.length} />
       )}
     </div>
