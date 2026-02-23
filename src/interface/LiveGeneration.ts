@@ -13,7 +13,7 @@ export type statusType =
 
 export interface LiveGenerationStore {
   latestStatusData: GeneratedList[];
-  submitPrompt: (prompt: string) => void;
+  submitPrompt: (prompt: string, id?: string) => void;
   getStatus: () => void;
   onRehydrateStorage?: (state?: {
     setState: any;

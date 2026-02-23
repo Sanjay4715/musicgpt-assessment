@@ -3,3 +3,8 @@ export interface StoreOptions {
   persist?: boolean;
   storageType?: string;
 }
+
+export interface CommonStore {
+  isProfileDropdown: boolean;
+  setStoreState: (value: Partial<CommonStore>) => void;
+}
