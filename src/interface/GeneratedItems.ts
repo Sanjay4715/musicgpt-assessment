@@ -1,3 +1,5 @@
+import { API_STATUS } from "@/enums";
+
 export interface GeneratedList {
   id: string;
   created_at?: string;
@@ -21,7 +23,14 @@ export interface GeneratedList {
 
 export type GeneratedListItemProps = GeneratedList;
 
+export type APIStatus =
+  | API_STATUS.PENDING
+  | API_STATUS.FETCHING
+  | API_STATUS.FAIL
+  | API_STATUS.SUCCESS;
+
 export interface GeneratedListStore {
+  apiStatus: APIStatus;
   audios: GeneratedList[];
   unprocessed: GeneratedList[];
   sortedGeneratedList: GeneratedList[];

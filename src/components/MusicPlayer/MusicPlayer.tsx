@@ -174,10 +174,10 @@ const MusicPlayer = () => {
         `}
     >
       <div
-        className={`items-center flex flex-col${
+        className={`items-center flex flex-col ${
           isMobile
             ? `bg-[#1d212599] backdrop-blur-[50px] rounded-lg w-full border border-[#ffffff1a] hover:bg-[#ffffff1a] cursor-pointer`
-            : "relative mx-auto w-[calc(100%-28px)] min-[960px]:w-[calc(100%-20px)] min-[960px]:max-w-185"
+            : "relative mx-auto w-[calc(100%-28px)] min-[960px]:w-[calc(100%-20px)] min-[960px]:max-w-225"
         }`}
       >
         <audio ref={audioRef} src={file_output_0} preload="metadata" />
@@ -185,7 +185,7 @@ const MusicPlayer = () => {
         {isMobile && (
           <div className="absolute -top-3 right-[-2] z-80">
             <Button
-              className="w-[24px] h-[24px] rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer"
+              className="w-6 h-6 rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer"
               onClick={() => toggleMusicPlayer(false)}
             >
               <X />
@@ -220,7 +220,7 @@ const MusicPlayer = () => {
               className="absolute -top-3 right-[-2] z-80"
             >
               <Button
-                className="w-[24px] h-[24px] rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer"
+                className="w-6 h-6 rounded-full bg-[#0000001a] border border-[#ffffff1a] text-white hover:bg-[ffffff1a] cursor-pointer"
                 onClick={() => toggleMusicPlayer(false)}
               >
                 <X />
