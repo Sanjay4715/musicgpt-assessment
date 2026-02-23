@@ -86,8 +86,13 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
                 />
               )
             ) : (
-              <Image alt="play" src={PlayIcon} width={20} height={20} 
-                  onClick={() => setMusicPlayPause(false)}/>
+              <Image
+                alt="play"
+                src={PlayIcon}
+                width={20}
+                height={20}
+                onClick={() => setMusicPlayPause(false)}
+              />
             )}
           </div>
         </div>
@@ -113,8 +118,11 @@ const GenerationItem = ({ ...generationItemProps }: GeneratedList) => {
               {getVersion(version_string)}
             </Button>
           )}
-          <ArrowDownToLine size={20} className="hover:text-white" />
+          {!isMobile && (
+            <ArrowDownToLine size={20} className="hover:text-white" />
+          )}
         </div>
+        {isMobile && <ArrowDownToLine size={20} className="hover:text-white" />}
         <Ellipsis size={24} />
       </div>
     </div>
