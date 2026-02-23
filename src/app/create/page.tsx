@@ -29,19 +29,21 @@ const Create = () => {
         <h2 className="text-[18px] font-semibold text-[#E4E6E8]">
           Recent generations
         </h2>
-        {apiStatus === API_STATUS.SUCCESS ? (
-          <div className="flex flex-col gap-1">
-            <TopupInfo />
-            {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
-              <ProcessingGenerationItem key={data.id} {...data} />
-            ))}
-            {sortedGeneratedList.map((generatedItem) => (
-              <GeneratedListItem key={generatedItem.id} {...generatedItem} />
-            ))}
-          </div>
-        ) : (
-          <SkeletonGeneratedItems />
-        )}
+        <div className="flex flex-col gap-1">
+          {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
+            <ProcessingGenerationItem key={data.id} {...data} />
+          ))}
+          {apiStatus === API_STATUS.SUCCESS ? (
+            <>
+              <TopupInfo />
+              {sortedGeneratedList.map((generatedItem) => (
+                <GeneratedListItem key={generatedItem.id} {...generatedItem} />
+              ))}
+            </>
+          ) : (
+            <SkeletonGeneratedItems />
+          )}
+        </div>
       </div>
     </div>
   );

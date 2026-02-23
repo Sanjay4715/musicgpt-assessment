@@ -47,21 +47,21 @@ const ProfileDropdown = ({ isMobile, onClose }: ProfileDropdownProps) => {
       <ProfileInfo />
       <CreditInfo />
       <Separator className="bg-[#ffffff0d] border border-[#ffffff0d] max-[960px]:bg-[#ffffff0d]" />
-      {apiStatus === API_STATUS.SUCCESS ? (
-        <div className="flex flex-col gap-1.5">
-          <TopupInfo />
-
-          {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
-            <ProcessingGenerationItem key={data.id} {...data} />
-          ))}
-
-          {sortedGeneratedList.map((generatedItem) => (
-            <GeneratedListItem key={generatedItem.id} {...generatedItem} />
-          ))}
-        </div>
-      ) : (
-        <SkeletonGeneratedItems />
-      )}
+      <div className="flex flex-col gap-1">
+        {sortArrayByCreatedAt(latestStatusData)?.map((data) => (
+          <ProcessingGenerationItem key={data.id} {...data} />
+        ))}
+        {apiStatus === API_STATUS.SUCCESS ? (
+          <>
+            <TopupInfo />
+            {sortedGeneratedList.map((generatedItem) => (
+              <GeneratedListItem key={generatedItem.id} {...generatedItem} />
+            ))}
+          </>
+        ) : (
+          <SkeletonGeneratedItems />
+        )}
+      </div>
     </div>
   );
 };
