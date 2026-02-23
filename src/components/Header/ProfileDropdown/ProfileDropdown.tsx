@@ -21,8 +21,6 @@ const ProfileDropdown = ({ isMobile, onClose }: ProfileDropdownProps) => {
     getGeneratedAudios();
   }, [getGeneratedAudios]);
 
-  console.log("isMobile", isMobile);
-
   return (
     <div
       data-id={
