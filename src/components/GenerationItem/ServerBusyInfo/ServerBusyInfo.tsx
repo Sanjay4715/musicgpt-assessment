@@ -1,7 +1,10 @@
 import { GeneratedList } from "@/interface/GeneratedItems";
+import { useLiveGenerationStore } from "@/store/useLiveGenerationStore";
 import { TriangleAlert } from "lucide-react";
 
 const ServerBusyInfo = ({ ...generatedItemProps }: GeneratedList) => {
+  const { submitPrompt } = useLiveGenerationStore();
+
   return (
     <div
       data-id="error-server"
@@ -9,10 +12,21 @@ const ServerBusyInfo = ({ ...generatedItemProps }: GeneratedList) => {
     >
       <span className="flex flex-row gap-1.5 text-[#EE0D37] items-center">
         <TriangleAlert size={20} />
-        <span>Oops! Server busy</span>
+        <span>{generatedItemProps.error_message}</span>
       </span>
-      <span className="text-[14px] text-[#BFC2C8]">
-        4.9K users in the queue. <u>Retry</u>
+      <span className="flex gap-1 text-[14px] text-[#BFC2C8]">
+        <span>{generatedItemProps.error_message_detail}</span>
+        <span
+          className="cursor-pointer underline"
+          onClick={() =>
+            submitPrompt(
+              generatedItemProps.input_prompt ?? "default",
+              generatedItemProps.id,
+            )
+          }
+        >
+          Retry
+        </span>
       </span>
     </div>
   );

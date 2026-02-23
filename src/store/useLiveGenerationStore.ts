@@ -33,10 +33,12 @@ export const useLiveGenerationStore = createStore<LiveGenerationStore>(
 
     socket.on("finalData", updateOrAddTask);
 
+    socket.on("serverBusy", updateOrAddTask);
+
     return {
       latestStatusData: [],
-      submitPrompt: (prompt: string) => {
-        socket.emit("submitPrompt", prompt);
+      submitPrompt: (prompt: string, id?: string) => {
+        socket.emit("submitPrompt", { prompt, id });
       },
       getStatus: () => {
         socket.emit("getStatus");
