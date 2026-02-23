@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { useCallback, useEffect, useRef, useState } from "react";
 import CommentItem from "../CommentItem/CommentItem";
 import { useMusicPlayerStore } from "@/store/useMusicPlayerStore";
+import RenderLyrics from "@/components/RenderLyrics/RenderLyrics";
 
 interface Comment {
   id: number;
@@ -113,7 +114,9 @@ const ExpandedArea = () => {
           <div className="text-white no-scrollbar line-clamp-6 mt-3 mb-5">
             {title}
           </div>
-          <div className="text-[#777A80]">{lyrics_output}</div>
+          <div className="text-[#777A80]">
+            <RenderLyrics lyrics={lyrics_output ?? ""} />
+          </div>
         </div>
       </div>
     </div>

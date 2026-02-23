@@ -15,3 +15,14 @@ export interface LyricsContentProps {
   lyrics: string;
   prompt: string;
 }
+
+export interface RenderLyricsProps {
+  lyrics: string;
+}
+
+export interface Lyrics {
+  start: number;
+  end: number;
+  text: string;
+  index: number;
+}

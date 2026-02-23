@@ -15,6 +15,7 @@ export interface GeneratedList {
   progress?: number;
   file_output_0?: string;
   lyrics_output?: string;
+  lyrics_output_timestamped?: string;
   audio_length_ms?: number;
 }
 

@@ -1,5 +1,5 @@
 import { STATUS_TYPE } from "@/enums";
-import Process from "./Process";
+import Process from "./Item/ProcessIngItem";
 import { GeneratedList } from "@/interface/GeneratedItems";
 import GeneratedListItem from "../GeneratedListItem/GeneratedListItem";
 import InvalidPromptInfo from "./InvalidPromptInfo/InvalidPromptInfo";

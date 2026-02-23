@@ -1,5 +1,8 @@
+import { formattedLyrics } from "@/common";
+import RenderLyrics from "@/components/RenderLyrics/RenderLyrics";
 import { LyricsContentProps } from "@/interface/MusicPlayer";
 import { FileMusic, Notebook } from "lucide-react";
+import { useMemo } from "react";
 
 const LyricsContent = ({ lyrics, prompt }: LyricsContentProps) => {
   return (
@@ -23,7 +26,9 @@ const LyricsContent = ({ lyrics, prompt }: LyricsContentProps) => {
         <div className="font-semibold text-[12px] uppercase">Lyrics</div>
       </div>
       <div className="bg-[#1d212599] backdrop-blur-[50px] border-[#1d212599] border rounded-[12px] p-4 mb-2">
-        <div className="text-[12px] leading-1.625">{lyrics}</div>
+        <div className="text-[12px] leading-1.625">
+          <RenderLyrics lyrics={lyrics} />
+        </div>
       </div>
     </div>
   );

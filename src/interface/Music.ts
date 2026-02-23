@@ -4,6 +4,8 @@ export interface MusicControlsProps {
   currentTime: number;
   duration: number;
   onPlayPause: () => void;
+  drawerOpen?: boolean;
+  toggleDrawer?: (value: boolean) => void;
 }
 
 export interface MusicTimerProps {
@@ -13,6 +15,7 @@ export interface MusicTimerProps {
 }
 
 export interface MusicTimelineProps extends MusicTimerProps {
+  isMobile?: boolean;
   isDrawer?: boolean;
   isDragging: boolean;
   handleMouseDown: (e: React.MouseEvent) => void;

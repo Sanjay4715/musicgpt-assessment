@@ -1,6 +1,8 @@
 import MusicTimer from "@/components/MusicTimer/MusicTimer";
 import { MusicControlsProps } from "@/interface/Music";
 import {
+  ChevronDown,
+  ChevronUp,
   Pause,
   Play,
   Repeat,
@@ -15,6 +17,8 @@ const MusicControls = ({
   currentTime,
   duration,
   onPlayPause,
+  toggleDrawer,
+  drawerOpen = false,
 }: MusicControlsProps) => {
   return (
     <>
@@ -22,6 +26,23 @@ const MusicControls = ({
         data-id="music-controls"
         className=" flex flex-row gap-4 z-10 items-center justify-end bg-transparent"
       >
+        {fromMobilePlayer && (
+          <>
+            {drawerOpen ? (
+              <ChevronDown
+                size={20}
+                className="text-[#ffffff80] hover:text-white cursor-pointer"
+                onClick={() => toggleDrawer?.(false)}
+              />
+            ) : (
+              <ChevronUp
+                size={20}
+                className="text-[#ffffff80] hover:text-white cursor-pointer"
+                onClick={() => toggleDrawer?.(true)}
+              />
+            )}
+          </>
+        )}
         {fromMobilePlayer && (
           <MusicTimer
             currentTime={currentTime}
